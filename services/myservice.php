@@ -20,7 +20,7 @@ switch ($action)
         $phone = $_REQUEST['phone'];
         $email = $_REQUEST['email'];
         $longitude = $_REQUEST['longitude'];
-        $latitude = $_REQUEST['ßlatitude'];
+        $latitude = $_REQUEST['latitude'];
         echo json_encode(Service_Provider::Register($facebook_id, $category, $name, $description, $country, $region, $city, $address, $phone, $email, $longitude, $latitude));
         break;
     case 'delete':

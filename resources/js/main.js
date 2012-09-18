@@ -2,7 +2,7 @@ var app = app || {};
 
 app.configuration = app.configuration || {
     // baseUrl: 'https://fbapps.my.phpcloud.com/appoint/',
-    baseUrl: 'http://localhost:8888/appoint/canvas/',
+    baseUrl: 'http://localhost/appoint/canvas/',
     appId: '',
     ogNamespace: ''
 };
@@ -65,6 +65,11 @@ app.Search.prototype.mapDom_ = function() {
 
 app.Search.prototype.bindEvents_ = function() {
     var self = this;
+
+    $('#results').on('change', '.rating', function() {
+        var me = $(this);
+        self.rate(me.closest('li').data('id') ,me.val());
+    });
 };
 
 app.Search.prototype.search = function() {
@@ -74,8 +79,13 @@ app.Search.prototype.search = function() {
         url: this.dom_.form.attr('action')});
 };
 
-app.Search.prototype.rate = function() {
-
+app.Search.prototype.rate = function(id, rating) {
+     return $.ajax({
+        type: 'GET',
+        data: {},
+        url: this.dom_.form.attr('action'),
+        dataType: 'json'
+    });
 };
 
 app.MyService = function(options) {
@@ -109,9 +119,15 @@ app.MyService.prototype.init_ = function() {
         $.ajax({
             type: 'GET',
             data: {action: 'get', id: this.options.userId},
-            url: this.dom_.form.attr('action')
+            url: this.dom_.form.attr('action'),
+            dataType: 'json'
         }).done(function(data) {
-            console.log(data);
+            self.dom_.name.val(data.name);
+            self.dom_.address.val(data.address);
+            self.dom_.email.val(data.email);
+            self.dom_.phone.val(data.phone);
+            self.dom_.category.val(data.category);
+            self.dom_.country.val(data.country);
         });
     }
 };
@@ -138,6 +154,7 @@ app.MyService.prototype.save = function() {
     return $.ajax({
         type: 'GET',
         data: this.dom_.form.serialize(),
-        url: this.dom_.form.attr('action')
+        url: this.dom_.form.attr('action'),
+        dataType: 'json'
     });
 };
