@@ -1,7 +1,9 @@
 <?php
+header('Content-type: text/json');
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+$action = $_REQUEST['action'];
+switch ($action)
+{
+    case 'insert':
+}
 ?>
