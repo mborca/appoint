@@ -9,17 +9,16 @@ $facebook = new Facebook(array(
 // the current page name
 $page = str_replace('.php', '', substr($_SERVER['SCRIPT_NAME'], strrpos($_SERVER['SCRIPT_NAME'], '/') + 1));
 
-// todo: replace avec login facebook
-$user_id = '570135085';
-// $user_id = $facebook->getUser();
-// if(!$user_id)
-// {
-//    $oauth_url = 'https://www.facebook.com/dialog/oauth';
-//    $oauth_url .= '?client_id='.FB_APP_ID;
-//    $oauth_url .= '&redirect_uri='.  urlencode(APP_URL);
-//    $oauth_url .= '&scope=email';
-//    client_redirect($oauth_url);
-// }
+$user_id = 1517375131;
+//$user_id = $facebook->getUser();
+//if(!$user_id)
+//{
+//   $oauth_url = 'https://www.facebook.com/dialog/oauth';
+//   $oauth_url .= '?client_id='.FB_APP_ID;
+//   $oauth_url .= '&redirect_uri='.  urlencode('https://apps.facebook.com/appointments-app/');
+//   $oauth_url .= '&scope=email';
+//   client_redirect($oauth_url);
+//}
 
 ?>
 <!DOCTYPE html>

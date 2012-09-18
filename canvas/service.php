@@ -36,7 +36,6 @@ for ($h=10; $h<18; $h=$h+1)
         $until->add(new DateInterval("P{$d}D"));
         $until->add(new DateInterval("PT{$nh}H"));
         $id = Appointment::Check($service_provider_facebook_id, $since->format(DateTime::W3C), $until->format((DateTime::W3C)));
-//        echo "<td>$id</td>";
         if($id == 0)
             echo "<td onclick=alert('book')></td>";
         elseif($id == $facebook_id)
