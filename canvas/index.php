@@ -1,6 +1,6 @@
 <?php include('../includes/header.php'); ?>
-<body id="page-<?php echo $page; ?>">
-    <?php include('../includes/menu.php'); ?>
+<?php include('../includes/menu.php'); ?>
+<div class="page">
     <ul id="categories">
         <li><a href="javascript:;">All</a></li>
         <li><a href="javascript:;">Category 1</a></li>
@@ -31,6 +31,6 @@
         </select>
         <input type="submit" value="Search" />
     </form>
-</body>
+</div>
 <?php include('../includes/scripts.php'); ?>
 </html>

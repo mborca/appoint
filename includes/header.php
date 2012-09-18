@@ -1,4 +1,25 @@
-<?php $page = str_replace('.php', '', substr($_SERVER['SCRIPT_NAME'], strrpos($_SERVER['SCRIPT_NAME'], '/') + 1)); ?>
+<?php 
+require_once '../api/api.php';
+
+$facebook = new Facebook(array(
+    'appId'  => FB_APP_ID,
+    'secret' => FB_APP_SECRET
+));
+
+// the current page name
+$page = str_replace('.php', '', substr($_SERVER['SCRIPT_NAME'], strrpos($_SERVER['SCRIPT_NAME'], '/') + 1));
+
+//$user_id = $facebook->getUser();
+//if(!$user_id)
+//{
+//    $oauth_url = 'https://www.facebook.com/dialog/oauth';
+//    $oauth_url .= '?client_id='.FB_APP_ID;
+//    $oauth_url .= '&redirect_uri='.  urlencode(APP_URL);
+//    $oauth_url .= '&scope=email';
+//    client_redirect($oauth_url);
+//}
+
+?>
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html xmlns:fb="http://ogp.me/ns/fb#" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html xmlns:fb="http://ogp.me/ns/fb#" class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -15,3 +36,4 @@
         <link rel="stylesheet" href="../resources/css/base.css">
         <link rel="stylesheet" href="../resources/css/main.css">
     </head>
+    <body id="page-<?php echo $page; ?>">
