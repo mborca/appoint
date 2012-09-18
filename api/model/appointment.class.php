@@ -17,7 +17,11 @@ class Appointment extends DB_Object
     }
     static public function Select($facebook_id, $start_date, $end_date)
     {
-        return DB_Helper::ExecuteObjectArray("CALL appointment_get_by_date($facebook_id, '$start_date', '$end_date')", 'Booking');
+        return DB_Helper::ExecuteObjectArray("CALL appointment_get_by_date($facebook_id, '$start_date', '$end_date')", 'Appointment');
+    }
+    static public function Check($service_provider_facebook_id, $start_date, $end_date)
+    {
+        return DB_Helper::ExecuteScalar("CALL appointment_check ($service_provider_facebook_id, '$start_date', '$end_date')");
     }
 }
 ?>
