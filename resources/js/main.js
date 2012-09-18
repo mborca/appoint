@@ -2,9 +2,10 @@ var app = app || {};
 
 app.configuration = app.configuration || {
     // baseUrl: 'https://fbapps.my.phpcloud.com/appoint/',
-    baseUrl: 'http://localhost/appoint/canvas/',
+    baseUrl: 'http://localhost/appoint/',
     appId: '',
-    ogNamespace: ''
+    ogNamespace: 'appointments-app',
+    userId: ''
 };
 
 app.controllers = app.controllers || {};
@@ -50,13 +51,19 @@ app.Base.prototype.bindEvents_ = function() {
 
 app.Search = function() {
     
+    this.userIsAuthorized_ = null;
     this.mapDom_();
     this.init_();
     this.bindEvents_();
 };
 
 app.Search.prototype.init_ = function() {
+    var self = this;
     
+    self.search($('#category').val(), $('#country').val(), $('#city_Canada').val())
+    .done(function(results) {
+        self.renderResults_(results);
+    });
 };
 
 app.Search.prototype.mapDom_ = function() {
@@ -66,24 +73,115 @@ app.Search.prototype.mapDom_ = function() {
 app.Search.prototype.bindEvents_ = function() {
     var self = this;
 
+    $('form').on('submit', function(e) {
+        e.preventDefault();
+        self.search($('#category').val(), $('#country').val(), $('#city_Canada').val())
+        .done(function(results) {
+          self.renderResults_(results);
+        });
+    });
+
     $('#results').on('change', '.rating', function() {
-        var me = $(this);
-        self.rate(me.closest('li').data('id') ,me.val());
+        var me = $(this),
+            li = me.closest('li');
+
+        self.rate(app.configuration.userId, 
+            li.data('id'),
+            me.val())
+        .done(function(rating) {
+            li.find('.average-rating').text(rating);
+        });
     });
 };
 
-app.Search.prototype.search = function() {
-    return $.ajax({
-        type: 'GET',
-        data: {},
-        url: this.dom_.form.attr('action')});
+app.Search.prototype.renderResults_ = function(results) {
+    
+    var template = $('#results .template');
+    
+    $('#results').children(':not(.template)').remove();
+    
+    if (!results)
+        return;
+
+    for (var i = results.length - 1; i >= 0; i--) {
+        var item = template.clone(false, false);
+        item.data('id', results[i].facebook_id);
+        item.find('.name').text(results[i].name);
+        item.find('.name').attr('href', 'service.php?id=' + results[i].facebook_id);
+        item.find('.city').text(results[i].city);
+        item.find('.country').text(results[i].country);
+        item.find('.category').text(results[i].category);
+        item.find('.average-rating').text(results[i].average_rating ? parseFloat(results[i].average_rating, 2) : 'N/A');
+        item.removeClass('template').appendTo('#results');
+    };
 };
 
-app.Search.prototype.rate = function(id, rating) {
-     return $.ajax({
+app.Search.prototype.executeIfAuthorized_ = function(callback, askForLogin){
+    var self = this;
+    
+    if(askForLogin === undefined)
+        askForLogin = true;
+
+    // if user already logged in
+    if(self.userIsAuthorized_)
+        callback();
+    else {
+        FB.getLoginStatus(function(response) {
+            if (response.authResponse) {
+                self.userIsAuthorized_ = true;
+                callback();
+            } else if (askForLogin) {
+                FB.login(function(response) {
+                    if (response.authResponse) {
+                        self.userIsAuthorized_ = true;
+                        callback();     
+                    } else {
+                        callback();
+                    }
+                }, { scope: 'publish_actions, friends_actions:' + app.configuration.ogNamespace + ', user_actions:' + app.configuration.ogNamespace });
+            } else 
+                callback();
+        });
+    }
+};
+
+app.Search.prototype.search = function(category, country, city) {
+   return $.ajax({
         type: 'GET',
-        data: {},
-        url: this.dom_.form.attr('action'),
+        data: {
+            category: category, 
+            country: country, 
+            city: city
+        },
+        url: app.configuration.baseUrl + 'services/search.php',
+        dataType: 'json'
+    });
+};
+
+app.Search.prototype.rate = function(facebookId, serviceProviderId, rating) {
+    var self = this;
+
+    self.executeIfAuthorized_(function() {
+        FB.api('/me/' + app.configuration.ogNamespace + ':rate', 
+            'post',
+            {
+                service: app.configuration.baseUrl + 'canvas/service.php?id=' + serviceProviderId,
+                rating: rating,
+                review: ''
+            },
+            function(data) {
+                console.log(arguments);
+            });
+    });
+
+    return $.ajax({
+        type: 'GET',
+        data: {
+            facebook_id: app.configuration.userId, 
+            service_provider_facebook_id: serviceProviderId, 
+            rating: rating
+        },
+        url: app.configuration.baseUrl + 'services/rate.php',
         dataType: 'json'
     });
 };

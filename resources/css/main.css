@@ -29,3 +29,39 @@ label, input, select {
 #page-myservice form {
     text-align: center;
 }
+
+.template {
+    display: none;
+}
+
+#results {
+    padding: 0;
+}
+
+#results li {
+    border-bottom: 1px dotted #ccc;
+    list-style: none;
+    margin: 10px 0;
+    padding: 10px 0;
+}
+
+#results li .name {
+    font-weight: bold;
+}
+
+#page-index #categories {
+    width: 25%;
+    float: left;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+#page-index #categories+div {
+    width: 75%;
+    float: left;
+}
+
+#page-index form {
+    background: #EEE;
+    border: 1px solid #DDD;
+}
