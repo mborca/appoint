@@ -1,7 +1,7 @@
 var app = app || {};
 
 app.configuration = app.configuration || {
-    // baseUrl: 'https://fbapps.my.phpcloud.com/appoint/',
+    ogUrl: 'https://fbapps.my.phpcloud.com/appoint/service.html',
     baseUrl: 'http://localhost/appoint/',
     appId: '',
     ogNamespace: 'appointments-app',
@@ -166,7 +166,7 @@ app.Search.prototype.rate = function(facebookId, serviceProviderId, rating) {
         FB.api('/me/' + app.configuration.ogNamespace + ':rate', 
             'post',
             {
-                service: app.configuration.baseUrl + 'canvas/service.php?id=' + serviceProviderId,
+                service: app.configuration.ogUrl,
                 rating: rating,
                 review: ''
             },
