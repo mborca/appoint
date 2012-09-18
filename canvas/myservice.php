@@ -21,28 +21,28 @@
         </select><br />
         <label for="country">Country:</label>
         <select id="country" name="country">
-            <option value="canada">Canada</option>
-            <option value="spain">Spain</option>
-            <option value="usa">United States</option>
+            <option value="Canada">Canada</option>
+            <option value="Spain">Spain</option>
+            <option value="Usa">United States</option>
         </select><br/>
         <label for="city">City:</label>
-        <select id="city_canada" name="city">
+        <select id="city_Canada" name="city">
             <option value=""></option>
-            <option value="montreal">Montreal</option>
-            <option value="quebec">Quebec</option>
-            <option value="toronto">Toronto</option>
+            <option value="Montreal">Montreal</option>
+            <option value="Quebec">Quebec</option>
+            <option value="Toronto">Toronto</option>
         </select>
-        <select id="city_spain" name="city" class="hidden">
+        <select id="city_Spain" name="city" class="hidden">
             <option value=""></option>
-            <option value="barcelona">Barcelona</option>
-            <option value="madrid">Madrid</option>
-            <option value="seville">Seville</option>
+            <option value="Barcelona">Barcelona</option>
+            <option value="Madrid">Madrid</option>
+            <option value="Seville">Seville</option>
         </select>
-        <select id="city_usa" name="city" class="hidden">
+        <select id="city_Usa" name="city" class="hidden">
             <option value=""></option>
-            <option value="new-york">New York</option>
-            <option value="washington">Washington</option>
-            <option value="san-francisco">San Francisco</option>
+            <option value="New-york">New York</option>
+            <option value="Washington">Washington</option>
+            <option value="San-francisco">San Francisco</option>
         </select><br/>
         <input type="button" value="Cancel" />
         <input type="submit" value="Save" />

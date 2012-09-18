@@ -1,7 +1,7 @@
 var app = app || {};
 
 app.configuration = app.configuration || {
-    // baseUrl: 'https://fbapps.my.phpcloud.com/appoint/',
+    ogUrl: 'https://fbapps.my.phpcloud.com/appoint/service.html',
     baseUrl: 'http://localhost/appoint/',
     appId: '',
     ogNamespace: 'appointments-app',
@@ -60,7 +60,7 @@ app.Search = function() {
 app.Search.prototype.init_ = function() {
     var self = this;
     
-    self.search($('#category').val(), $('#country').val(), $('#city_Canada').val())
+    self.search($('#category').val(), $('#country').val(), $('select[id^=city_]:not(.hidden)').val())
     .done(function(results) {
         self.renderResults_(results);
     });
@@ -75,7 +75,8 @@ app.Search.prototype.bindEvents_ = function() {
 
     $('form').on('submit', function(e) {
         e.preventDefault();
-        self.search($('#category').val(), $('#country').val(), $('#city_Canada').val())
+
+        self.search($('#category').val(), $('#country').val(), $('select[id^=city_]:not(.hidden)').val())
         .done(function(results) {
           self.renderResults_(results);
         });
@@ -165,7 +166,7 @@ app.Search.prototype.rate = function(facebookId, serviceProviderId, rating) {
         FB.api('/me/' + app.configuration.ogNamespace + ':rate', 
             'post',
             {
-                service: app.configuration.baseUrl + 'canvas/service.php?id=' + serviceProviderId,
+                service: app.configuration.ogUrl,
                 rating: rating,
                 review: ''
             },
@@ -220,6 +221,9 @@ app.MyService.prototype.init_ = function() {
             url: this.dom_.form.attr('action'),
             dataType: 'json'
         }).done(function(data) {
+            if(!data)
+                return;
+
             self.dom_.name.val(data.name);
             self.dom_.address.val(data.address);
             self.dom_.email.val(data.email);
@@ -251,7 +255,7 @@ app.MyService.prototype.save = function() {
 
     return $.ajax({
         type: 'GET',
-        data: this.dom_.form.serialize(),
+        data: this.dom_.form.serialize().replace('city=&', ''),
         url: this.dom_.form.attr('action'),
         dataType: 'json'
     });
