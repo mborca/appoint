@@ -1,7 +1,6 @@
 <?php
+require_once '../api/api.php';
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+$id = $_REQUEST['id'];
+echo json_encode(Appointment::Delete($id));
 ?>

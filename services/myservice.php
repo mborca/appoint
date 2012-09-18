@@ -1,6 +1,5 @@
 <?php
 require_once '../api/api.php';
-//header('Content-type: text/json');
 
 $id = $_REQUEST['id'];
 $action = $_REQUEST['action'];
