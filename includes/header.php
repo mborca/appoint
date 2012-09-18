@@ -1,3 +1,6 @@
+<?php 
+    $page = 'search'; 
+?>
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html xmlns:fb="http://ogp.me/ns/fb#" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html xmlns:fb="http://ogp.me/ns/fb#" class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -11,5 +14,6 @@
         <meta name="viewport" content="width=device-width">
 
         <link rel="stylesheet" href="../resources/css/normalize.css">
+        <link rel="stylesheet" href="../resources/css/base.css">
         <link rel="stylesheet" href="../resources/css/main.css">
     </head>
