@@ -2,9 +2,10 @@ var app = app || {};
 
 app.configuration = app.configuration || {
     // baseUrl: 'https://fbapps.my.phpcloud.com/appoint/',
-    baseUrl: 'http://localhost/appoint/canvas/',
+    baseUrl: 'http://localhost/appoint/',
     appId: '',
-    ogNamespace: ''
+    ogNamespace: '',
+    userId: ''
 };
 
 app.controllers = app.controllers || {};
@@ -67,8 +68,15 @@ app.Search.prototype.bindEvents_ = function() {
     var self = this;
 
     $('#results').on('change', '.rating', function() {
-        var me = $(this);
-        self.rate(me.closest('li').data('id') ,me.val());
+        var me = $(this),
+            li = me.closest('li');
+
+        self.rate(app.configuration.userId, 
+            li.data('id'),
+            me.val())
+        .done(function(rating) {
+            li.find('.average-rating').text(rating);
+        });
     });
 };
 
@@ -79,11 +87,16 @@ app.Search.prototype.search = function() {
         url: this.dom_.form.attr('action')});
 };
 
-app.Search.prototype.rate = function(id, rating) {
-     return $.ajax({
+app.Search.prototype.rate = function(facebookId, serviceProviderId, rating) {
+    
+    return $.ajax({
         type: 'GET',
-        data: {},
-        url: this.dom_.form.attr('action'),
+        data: {
+            facebook_id: app.configuration.userId, 
+            service_provider_facebook_id: serviceProviderId, 
+            rating: rating
+        },
+        url: app.configuration.baseUrl + 'services/rate.php',
         dataType: 'json'
     });
 };

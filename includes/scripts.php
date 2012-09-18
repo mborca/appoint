@@ -9,7 +9,8 @@
     };
     
     app.configuration.appId = '<?php echo FB_APP_ID; ?>';
-
+    app.configuration.userId = <?php echo $user_id; ?>
+    
     window.fbAsyncInit = function() {
         app.dependencies.facebookSDK = true;
         $(document).trigger('checkdependencies');

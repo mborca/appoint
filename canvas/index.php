@@ -1,4 +1,5 @@
 <?php include('../includes/header.php'); ?>
+<div id="fb-root"></div>
 <?php include('../includes/menu.php'); ?>
 <div class="page">
     <ul id="categories">
@@ -32,7 +33,7 @@
         <input type="submit" value="Search" />
     </form>
     <ul id="results">
-        <li data-id="1">
+        <li id="service-11101" data-id="11101">
             <span class="name">test</span>
             <span class="average-rating">3.5</span>
             <select class="rating">
@@ -46,4 +47,9 @@
     </ul>
 </div>
 <?php include('../includes/scripts.php'); ?>
+<script>
+    $(document).ready(function() {
+        app.controllers.page = new app.Search();
+    });
+</script>
 </html>
