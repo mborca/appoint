@@ -31,6 +31,19 @@
         </select>
         <input type="submit" value="Search" />
     </form>
+    <ul id="results">
+        <li data-id="1">
+            <span class="name">test</span>
+            <span class="average-rating">3.5</span>
+            <select class="rating">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+        </li>
+    </ul>
 </div>
 <?php include('../includes/scripts.php'); ?>
 </html>

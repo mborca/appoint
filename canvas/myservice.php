@@ -3,6 +3,12 @@
 <div class="page">
     <form id="myservice-form" method="get" action="../services/myservice.php">
         <input type="hidden" name="action" value="register" />
+        <input type="hidden" name="id" value="0" />
+        <input type="hidden" name="latitude" value="0" />
+        <input type="hidden" name="longitude" value="0" />
+        <input type="hidden" name="region" value="" />
+        <input type="hidden" name="description" value="" />
+        <input type="hidden" name="facebook_id" value="<?php echo $user_id ?>" />
         <label for="name">Name:</label><input id="name" name="name" /><br />
         <label for="address">Address:</label><input id="address" name="address" /><br />
         <label for="email">Email:</label><input id="email" name="email" /><br />
