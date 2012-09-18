@@ -1,7 +1,8 @@
 <?php
+require_once '../api/api.php';
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+$category = $_REQUEST['category'];
+$country = $_REQUEST['country'];
+$city = $_REQUEST['city'];
+echo json_decode(Service_Provider::Search($category, $country, $city))
 ?>

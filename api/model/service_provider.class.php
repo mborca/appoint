@@ -18,4 +18,8 @@ class Service_Provider extends DB_Object
     {
         return DB_Helper::ExecuteNonQuery("CALL service_provider_delete ($facebook_id)");
     }
+    static public function Search($category, $country, $city)
+    {
+        return DB_Helper::ExecuteObjectArray("CALL appointment_search('$category', '$country', '$city')", 'Service_Provider');
+    }
 }
