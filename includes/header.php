@@ -1,5 +1,5 @@
 <?php
-require_once 'api/api.php';
+require_once '../api/api.php';
 
 $facebook = new Facebook(array(
     'appId'  => FB_APP_ID,
