@@ -1,5 +1,21 @@
-<?php 
-    $page = 'search'; 
+<?php
+require_once 'api/api.php';
+
+$facebook = new Facebook(array(
+    'appId'  => FB_APP_ID,
+    'secret' => FB_APP_SECRET
+));
+//$user_id = $facebook->getUser();
+//if(!$user_id)
+//{
+//    $oauth_url = 'https://www.facebook.com/dialog/oauth';
+//    $oauth_url .= '?client_id='.FB_APP_ID;
+//    $oauth_url .= '&redirect_uri='.  urlencode(APP_URL);
+//    $oauth_url .= '&scope=email';
+//    client_redirect($oauth_url);
+//}
+
+$page = 'search'; 
 ?>
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html xmlns:fb="http://ogp.me/ns/fb#" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
