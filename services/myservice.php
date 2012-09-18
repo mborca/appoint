@@ -1,9 +1,19 @@
 <?php
-header('Content-type: text/json');
+require_once '../api/api.php';
+//header('Content-type: text/json');
 
+$id = $_REQUEST['id'];
 $action = $_REQUEST['action'];
 switch ($action)
 {
-    case 'insert':
+    case 'get':
+        echo json_encode(Service_Provider::GetByFacebookID($id));
+        break;
+    case 'register':
+        break;
+    case 'delete':
+        break;
+    default:
+        throw new Exception("Action not defined: $action");
 }
 ?>
