@@ -2,4 +2,6 @@
 ?>
 <h3>APPoint</h3>
 
-Appointments app
+header('location: canvas/index.php');
+
+?>

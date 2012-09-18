@@ -1,7 +1,6 @@
-<?php
-
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-?>
+<?php include('../includes/header.php'); ?>
+<body>
+    <?php include('../includes/menu.php'); ?>
+</body>
+<?php include('../includes/scripts.php'); ?>
+</html>

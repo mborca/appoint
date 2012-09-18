@@ -1,7 +1,7 @@
-<?php
-
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-?>
+<nav>
+    <ul>
+        <li><a href="index.php">Search</a></li>
+        <li><a href="myservice.php">My service</a></li>
+        <li><a href="about.php">About</a></li>
+    </ul>
+</nav>
