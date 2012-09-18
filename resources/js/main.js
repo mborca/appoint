@@ -58,16 +58,17 @@ app.Search.prototype.bindEvents_ = function() {
     var self = this;
 };
 
-app.MyService = function() {
+app.MyService = function(options) {
     
+    this.options = $.extend({}, app.MyService.options, options);
     this.mapDom_();
     this.init_();
     this.bindEvents_();
 };
 
-app.MyService.prototype.init_ = function() {
-    
-};
+app.MyService.options = {
+    userId: ''
+}
 
 app.MyService.prototype.mapDom_ = function() {
     this.dom_ = {};
@@ -79,6 +80,21 @@ app.MyService.prototype.mapDom_ = function() {
     this.dom_.phone = $('#phone');
     this.dom_.category = $('#category');
     this.dom_.country = $('#country');
+};
+
+app.MyService.prototype.init_ = function() {
+    var self = this;
+
+    if (this.options.userId) {
+        $.ajax({
+            type: 'GET',
+            data: {action: 'get', id: this.options.userId},
+            url: this.dom_.form.attr('action')
+        }).done(function(data) {
+            // self.dom_.name.val()
+            console.log(data);
+        });
+    }
 };
 
 app.MyService.prototype.bindEvents_ = function() {
@@ -103,9 +119,6 @@ app.MyService.prototype.save = function() {
     return $.ajax({
         type: 'GET',
         data: this.dom_.form.serialize(),
-        url: this.dom_.form.attr('action'),
-        dataType: 'json'
-    }).pipe(function(data) {
-    
+        url: this.dom_.form.attr('action')
     });
 };

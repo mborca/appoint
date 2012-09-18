@@ -2,6 +2,7 @@
 <?php include('../includes/menu.php'); ?>
 <div class="page">
     <form id="myservice-form" method="get" action="../services/myservice.php">
+        <input type="hidden" name="action" value="register" />
         <label for="name">Name:</label><input id="name" name="name" /><br />
         <label for="address">Address:</label><input id="address" name="address" /><br />
         <label for="email">Email:</label><input id="email" name="email" /><br />
@@ -45,7 +46,7 @@
 <?php include('../includes/scripts.php'); ?>
 <script>
     $(document).ready(function() {
-        app.controllers.page = new app.MyService();
+        app.controllers.page = new app.MyService({userId: '<?php echo $user_id; ?>'});
     });
 </script>
 </html>
