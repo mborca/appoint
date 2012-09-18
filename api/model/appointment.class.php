@@ -15,5 +15,9 @@ class Appointment extends DB_Object
     {
         return DB_Helper::ExecuteNonQuery("CALL service_provider_delete ($id)");
     }
+    static public function Select($facebook_id, $start_date, $end_date)
+    {
+        return DB_Helper::ExecuteObjectArray("CALL appointment_get_by_date($facebook_id, '$start_date', '$end_date')", 'Booking');
+    }
 }
 ?>
