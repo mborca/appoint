@@ -260,3 +260,84 @@ app.MyService.prototype.save = function() {
         dataType: 'json'
     });
 };
+
+app.Service = function(serviceProviderId) {
+    
+    this.serviceProviderId = serviceProviderId;
+    this.mapDom_();
+    this.init_();
+    this.bindEvents_();
+};
+
+app.Service.prototype.init_ = function() {
+    
+};
+
+app.Service.prototype.mapDom_ = function() {
+    this.dom_ = {};
+};
+
+app.Service.prototype.bindEvents_ = function() {
+    var self = this;
+
+    $('table').on('click', 'td', function(){
+        var me = $(this),
+            id = me.data('id'),
+            action = me.data('action');
+        
+        if (!id)
+            return;
+        
+        self.executeIfAuthorized_(function() {
+
+            FB.api('/me', function(response) {
+                console.log(response);
+                $.ajax({
+                    type: 'GET',
+                    data: {
+                        start_date: '',
+                        end_date: '',
+                        service_provider_facebook_id: self.serviceProviderId,
+                        user_email: response.email,
+                        user_facebook_id: response.id,
+                        user_firstname: response.first_name,
+                        user_lastname: response.last_name
+                    },
+                    url: app.configuration.baseUrl + 'services/rate.php',
+                    dataType: 'json'
+                }).done(function(){
+
+                });
+            });
+        });
+    });
+};
+
+app.Service.prototype.executeIfAuthorized_ = function(callback, askForLogin){
+    var self = this;
+    
+    if(askForLogin === undefined)
+        askForLogin = true;
+
+    // if user already logged in
+    if(self.userIsAuthorized_)
+        callback();
+    else {
+        FB.getLoginStatus(function(response) {
+            if (response.authResponse) {
+                self.userIsAuthorized_ = true;
+                callback();
+            } else if (askForLogin) {
+                FB.login(function(response) {
+                    if (response.authResponse) {
+                        self.userIsAuthorized_ = true;
+                        callback();
+                    } else {
+                        callback();
+                    }
+                }, { scope: 'email' });
+            } else 
+                callback();
+        });
+    }
+};

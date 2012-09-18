@@ -37,9 +37,9 @@ for ($h=10; $h<18; $h=$h+1)
         $until->add(new DateInterval("PT{$nh}H"));
         $id = Appointment::Check($service_provider_facebook_id, $since->format(DateTime::W3C), $until->format((DateTime::W3C)));
         if($id == 0)
-            echo "<td onclick=alert('book')></td>";
+            echo "<td data-since=\"$since\" data-until=\"$until\" data-action=\"book\" data-id=\"$id\"></td>";
         elseif($id == $facebook_id)
-            echo "<td style='background-color:green' onclick=alert('cancel')></td>";
+            echo "<td style='background-color:green' data-action=\"cancel\" data-id=\"$id\"></td>";
         else
             echo "<td style='background-color:red'></td>";
     }
@@ -49,4 +49,9 @@ for ($h=10; $h<18; $h=$h+1)
 </table>
     
 <?php include('../includes/scripts.php'); ?>
+<script>
+    $(document).ready(function() {
+        var test = app.Service('<?php echo $service_provider_facebook_id; ?>');
+    });
+</script>
 </html>
