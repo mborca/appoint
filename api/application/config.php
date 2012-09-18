@@ -8,6 +8,12 @@ define('DB_SERVER', 'localhost');
 define('DB_DATABASE', 'appoint');
 define('DB_USERNAME', 'appoint');
 define('DB_PASSWORD', 'appoint');
+// Production
+//define('DB_SERVER', 'mycontainer-db.my.phpcloud.com');
+//define('DB_DATABASE', 'fbapps');
+//define('DB_USERNAME', 'fbapps');
+//define('DB_PASSWORD', '6tfc7ygv');
+
 
 // Facebook app
 define('FB_APP_ID', 416854151706592);
