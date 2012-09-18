@@ -57,7 +57,12 @@ app.Search = function() {
 };
 
 app.Search.prototype.init_ = function() {
+    var self = this;
     
+    self.search($('#category').val(), $('#country').val(), $('#city').val())
+    .done(function(results) {
+        self.renderResults_(results);
+    });
 };
 
 app.Search.prototype.mapDom_ = function() {
@@ -66,6 +71,14 @@ app.Search.prototype.mapDom_ = function() {
 
 app.Search.prototype.bindEvents_ = function() {
     var self = this;
+
+    $('form').on('submit', function(e) {
+        e.preventDefault();
+        self.search($('#category').val(), $('#country').val(), $('#city_canada').val())
+        .done(function(results) {
+          self.renderResults_(results);
+        });
+    });
 
     $('#results').on('change', '.rating', function() {
         var me = $(this),
@@ -80,11 +93,34 @@ app.Search.prototype.bindEvents_ = function() {
     });
 };
 
-app.Search.prototype.search = function() {
-    return $.ajax({
+app.Search.prototype.renderResults_ = function(results) {
+    
+    var template = $('#results .template');
+    
+    $('#results').children(':not(.template)').remove();
+    
+    for (var i = results.length - 1; i >= 0; i--) {
+        var item = template.clone(false, false);
+        item.find('.name').text(results[i].name);
+        item.find('.name').text(results[i].name);
+        item.find('.name').text(results[i].name);
+        item.find('.name').text(results[i].name);
+        item.appendTo('#results');
+    };
+
+};
+
+app.Search.prototype.search = function(category, country, city) {
+   return $.ajax({
         type: 'GET',
-        data: {},
-        url: this.dom_.form.attr('action')});
+        data: {
+            category: category, 
+            country: country, 
+            city: city
+        },
+        url: app.configuration.baseUrl + 'services/search.php',
+        dataType: 'json'
+    });
 };
 
 app.Search.prototype.rate = function(facebookId, serviceProviderId, rating) {

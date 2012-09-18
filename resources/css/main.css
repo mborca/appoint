@@ -29,3 +29,7 @@ label, input, select {
 #page-myservice form {
     text-align: center;
 }
+
+.template {
+    display: none;
+}
