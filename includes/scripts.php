@@ -4,8 +4,6 @@
 <script src="../resources/js/main.js"></script>
 <script>
     $(document).ready(function() {
-        app.Base = new function() {
-
-        };
+        app.controllers.base = new app.Base();
     });
 </script>
