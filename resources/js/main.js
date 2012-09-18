@@ -1,6 +1,8 @@
 var app = app || {};
 
 app.configuration = app.configuration || {
+    // baseUrl: 'https://fbapps.my.phpcloud.com/appoint/',
+    baseUrl: 'http://localhost:8888/appoint/canvas/',
     appId: '',
     ogNamespace: ''
 };
@@ -19,6 +21,13 @@ app.Base = function() {
 
 app.Base.prototype.init_ = function() {
     
+    FB.init({
+      appId      : app.configuration.appId, // App ID
+      channelUrl : app.configuration.baseUrl.replace(/https?:/, '') + 'channel.php', // Channel File
+      status     : true, // check login status
+      cookie     : true, // enable cookies to allow the server to access the session
+      xfbml      : true  // parse XFBML
+    });
 };
 
 app.Base.prototype.mapDom_ = function() {
@@ -58,6 +67,17 @@ app.Search.prototype.bindEvents_ = function() {
     var self = this;
 };
 
+app.Search.prototype.search = function() {
+    return $.ajax({
+        type: 'GET',
+        data: {},
+        url: this.dom_.form.attr('action')});
+};
+
+app.Search.prototype.rate = function() {
+
+};
+
 app.MyService = function(options) {
     
     this.options = $.extend({}, app.MyService.options, options);
@@ -91,7 +111,6 @@ app.MyService.prototype.init_ = function() {
             data: {action: 'get', id: this.options.userId},
             url: this.dom_.form.attr('action')
         }).done(function(data) {
-            // self.dom_.name.val()
             console.log(data);
         });
     }
