@@ -1,10 +1,13 @@
 <?php
 
+define('APP_CANVAS_URL', 'https://apps.facebook.com/appointments-app/');
+define('APP_MOBILE_URL', 'https://fbapps.phpcloud.com/appoint/mobile/');
+
 // Database
-define(DB_SERVER, 'localhost');
-define(DB_DATABASE, 'appoint');
-define(DB_USERNAME, 'appoint');
-define(DB_PASSWORD, 'appoint');
+define('DB_SERVER', 'localhost');
+define('DB_DATABASE', 'appoint');
+define('DB_USERNAME', 'appoint');
+define('DB_PASSWORD', 'appoint');
 
 // Facebook app
 define('FB_APP_ID', 416854151706592);
