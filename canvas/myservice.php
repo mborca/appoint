@@ -15,10 +15,9 @@
         <label for="phone">Phone:</label><input id="phone" name="phone" /><br />
         <label for="category">Category:</label>
         <select id="category" name="category">
-            <option value="category_1">Category 1</option>
-            <option value="category_2">Category 2</option>
-            <option value="category_3">Category 3</option>
-            <option value="category_4">Category 4</option>
+            <option value="Barber">Barber</option>
+            <option value="Dentist">Dentist</option>
+            <option value="Financial">Financial</option>
         </select><br />
         <label for="country">Country:</label>
         <select id="country" name="country">

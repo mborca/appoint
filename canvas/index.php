@@ -4,10 +4,9 @@
 <div class="page">
     <ul id="categories">
         <li><a href="?category=">All</a></li>
-        <li><a href="?category=category_1">Category 1</a></li>
-        <li><a href="?category=category_2">Category 2</a></li>
-        <li><a href="?category=category_3">Category 3</a></li>
-        <li><a href="?category=category_4">Category 4</a></li>
+        <li><a href="?category=Barber">Barber</a></li>
+        <li><a href="?category=Dentist">Dentist</a></li>
+        <li><a href="?category=Financial">Financial</a></li>
     </ul>
     <form method="GET" action="../services/search.php">
         <input type="hidden" id="category" value="<?php echo $_REQUEST['category'] ?>">
@@ -17,7 +16,7 @@
             <option value="usa">United States</option>
         </select>
         <select id="city_canada" name="city">
-            <option value="montreal">Montreal</option>
+            <option value="montreal" selected="selected">Montreal</option>
             <option value="quebec">Quebec</option>
             <option value="toronto">Toronto</option>
         </select>

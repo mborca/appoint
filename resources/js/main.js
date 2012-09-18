@@ -59,7 +59,7 @@ app.Search = function() {
 app.Search.prototype.init_ = function() {
     var self = this;
     
-    self.search($('#category').val(), $('#country').val(), $('#city').val())
+    self.search($('#category').val(), $('#country').val(), $('#city_canada').val())
     .done(function(results) {
         self.renderResults_(results);
     });
