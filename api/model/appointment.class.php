@@ -5,7 +5,7 @@
  *
  * @author marian.borca
  */
-class Appointment
+class Appointment extends DB_Object
 {
 }
 

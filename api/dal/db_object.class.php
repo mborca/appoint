@@ -26,8 +26,8 @@ abstract class DB_Object
         $object = new $class();
         foreach ($array as $key => $value)
             $object->$key = $value;
-        if($object->id == 0)
-            $object = NULL;
+//        if($object->id == 0)
+//            $object = NULL;
         return $object;
     }
     static public function ListFromArray($array, $class=NULL)
@@ -39,8 +39,8 @@ abstract class DB_Object
             $object = new $class();
             foreach ($val as $key => $value)
                 $object->$key = $value;
-            if($object->id == 0)
-                $object = NULL;
+//            if($object->id == 0)
+//                $object = NULL;
             $list[] = $object;
         }
         return $list;

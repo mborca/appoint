@@ -19,7 +19,7 @@ class DB_Helper
         return $mysqli;
     }
     
-    static public function Execute($query, $query_type, $class=NULL, $ttl=NULL)
+    static public function Execute($query, $query_type, $class=NULL)
     {
         $results = NULL;
         $mysqli = self::Connection();
@@ -47,16 +47,16 @@ class DB_Helper
                 if(is_null($class))
                     throw new Exception("ERROR: Undefined class, cannot instantiate NULL class");
                 $results = $result->fetch_object($class);
-                if($results->id == 0)
-                    $results = NULL;
+//                if($results->id == 0)
+//                    $results = NULL;
                 break;
             case QueryType::ObjectArray:
                 if(is_null($class))
                     throw new Exception("ERROR: Undefined class, cannot instantiate NULL class");
                 while ($row = $result->fetch_object($class))
                 {
-                    if($row->id == 0)
-                        $row = NULL;
+//                    if($row->id == 0)
+//                        $row = NULL;
                     $results[] = $row;
                 }
                 break;

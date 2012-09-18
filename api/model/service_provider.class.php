@@ -4,12 +4,11 @@
  *
  * @author marian.borca
  */
-class Service_Provider
+class Service_Provider extends DB_Object
 {
-    static public function Get($id)
+    static public function GetByFacebookID($facebook_id)
     {
-        return DB_Object::Get($id);
+        return DB_Helper::ExecuteSingleObject("CALL service_provider_get ($facebook_id)", 'Service_Provider');
     }
 }
-
 ?>
