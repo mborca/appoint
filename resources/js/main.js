@@ -2,7 +2,7 @@ var app = app || {};
 
 app.configuration = app.configuration || {
     ogUrl: 'https://fbapps.my.phpcloud.com/appoint/service.html',
-    baseUrl: 'http://localhost/appoint/',
+    baseUrl: 'https://appt.cossette.com/',
     appId: '',
     ogNamespace: 'appointments-app',
     userId: ''
