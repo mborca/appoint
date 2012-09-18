@@ -14,12 +14,7 @@ abstract class DB_Object
         $class = is_null($class) ? strtolower(get_called_class()) : strtolower($class);
         return DB_Helper::ExecuteSingleObject("CALL {$class}_get ($id)", $class);
     }
-    static public function Select($class=NULL)
-    {
-        $class = is_null($class) ? strtolower(get_called_class()) : strtolower($class);
-        return DB_Helper::ExecuteObjectArray("CALL {$class}_select", $class);
-    }
-
+    
     static public function ObjectFromArray($array, $class=NULL)
     {
         if(is_null($class)) $class = get_called_class();

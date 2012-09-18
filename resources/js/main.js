@@ -3,7 +3,7 @@ var app = app || {};
 app.configuration = app.configuration || {
     ogUrl: 'https://fbapps.my.phpcloud.com/appoint/service.html',
     baseUrl: 'http://localhost/appoint/',
-    appId: '',
+    appId: '416854151706592',
     ogNamespace: 'appointments-app',
     userId: ''
 };
@@ -263,6 +263,7 @@ app.MyService.prototype.save = function() {
 
 app.Service = function(serviceProviderId) {
     
+    this.userIsAuthorized_ = false;
     this.serviceProviderId = serviceProviderId;
     this.mapDom_();
     this.init_();
@@ -283,33 +284,32 @@ app.Service.prototype.bindEvents_ = function() {
     $('table').on('click', 'td', function(){
         var me = $(this),
             id = me.data('id'),
-            action = me.data('action');
-        
-        if (!id)
+            action = me.data('action'),
+            since = me.data('since'),
+            until = me.data('until');
+
+
+        if (!action)
             return;
         
-        self.executeIfAuthorized_(function() {
 
-            FB.api('/me', function(response) {
-                console.log(response);
-                $.ajax({
-                    type: 'GET',
-                    data: {
-                        start_date: '',
-                        end_date: '',
-                        service_provider_facebook_id: self.serviceProviderId,
-                        user_email: response.email,
-                        user_facebook_id: response.id,
-                        user_firstname: response.first_name,
-                        user_lastname: response.last_name
-                    },
-                    url: app.configuration.baseUrl + 'services/rate.php',
-                    dataType: 'json'
-                }).done(function(){
-
-                });
-            });
+        $.ajax({
+            type: 'GET',
+            data: {
+                start_date: since,
+                end_date: until,
+                service_provider_facebook_id: self.serviceProviderId,
+                user_email: 'email@email.com',
+                user_facebook_id: 1517375131,
+                user_firstname: 'test',
+                user_lastname: 'test2'
+            },
+            url: app.configuration.baseUrl + 'services/book.php',
+            dataType: 'json'
+        }).always(function(){
+            me.css('background-color', 'green');
         });
+
     });
 };
 
@@ -335,7 +335,7 @@ app.Service.prototype.executeIfAuthorized_ = function(callback, askForLogin){
                     } else {
                         callback();
                     }
-                }, { scope: 'email' });
+                });
             } else 
                 callback();
         });

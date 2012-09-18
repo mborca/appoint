@@ -1,4 +1,5 @@
 <?php include('../includes/header.php'); ?>
+<div id="fb-root"></div>
 <?php include('../includes/menu.php'); ?>
 <?php
 
@@ -6,8 +7,6 @@ $facebook_id = 1517375131;
 $service_provider_facebook_id = 1517375131;
 $start_date = '2012-09-24';
 $end_date = '2012-09-30';
-
-//$appointments = Appointment::Select($service_provider_facebook_id, $start_date, $end_date);
 ?>
 <table border="1">
     <tr>
@@ -35,9 +34,9 @@ for ($h=10; $h<18; $h=$h+1)
         $until = new DateTime($start_date);
         $until->add(new DateInterval("P{$d}D"));
         $until->add(new DateInterval("PT{$nh}H"));
-        $id = Appointment::Check($service_provider_facebook_id, $since->format(DateTime::W3C), $until->format((DateTime::W3C)));
+        $id = Appointment::Check($service_provider_facebook_id, $since->format(DateTime::W3C), $until->format(DateTime::W3C));
         if($id == 0)
-            echo "<td data-since=\"$since\" data-until=\"$until\" data-action=\"book\" data-id=\"$id\"></td>";
+            echo "<td data-since=\"{$since->format(DateTime::W3C)}\" data-until=\"{$until->format(DateTime::W3C)}\" data-action=\"book\" data-id=\"$id\"></td>";
         elseif($id == $facebook_id)
             echo "<td style='background-color:green' data-action=\"cancel\" data-id=\"$id\"></td>";
         else
@@ -51,7 +50,7 @@ for ($h=10; $h<18; $h=$h+1)
 <?php include('../includes/scripts.php'); ?>
 <script>
     $(document).ready(function() {
-        var test = app.Service('<?php echo $service_provider_facebook_id; ?>');
+        app.controllers.page = new app.Service('<?php echo $service_provider_facebook_id; ?>');
     });
 </script>
 </html>
