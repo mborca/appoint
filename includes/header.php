@@ -10,7 +10,7 @@ $facebook = new Facebook(array(
 $page = str_replace('.php', '', substr($_SERVER['SCRIPT_NAME'], strrpos($_SERVER['SCRIPT_NAME'], '/') + 1));
 
 // todo: replace avec login facebook
-$user_id = '288172387';
+$user_id = '570135085';
 // $user_id = $facebook->getUser();
 // if(!$user_id)
 // {

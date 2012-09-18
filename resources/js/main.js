@@ -4,7 +4,7 @@ app.configuration = app.configuration || {
     // baseUrl: 'https://fbapps.my.phpcloud.com/appoint/',
     baseUrl: 'http://localhost/appoint/',
     appId: '',
-    ogNamespace: '',
+    ogNamespace: 'appointments-app',
     userId: ''
 };
 
@@ -51,6 +51,7 @@ app.Base.prototype.bindEvents_ = function() {
 
 app.Search = function() {
     
+    this.userIsAuthorized_ = null;
     this.mapDom_();
     this.init_();
     this.bindEvents_();
@@ -59,7 +60,7 @@ app.Search = function() {
 app.Search.prototype.init_ = function() {
     var self = this;
     
-    self.search($('#category').val(), $('#country').val(), $('#city_canada').val())
+    self.search($('#category').val(), $('#country').val(), $('#city_Canada').val())
     .done(function(results) {
         self.renderResults_(results);
     });
@@ -74,7 +75,7 @@ app.Search.prototype.bindEvents_ = function() {
 
     $('form').on('submit', function(e) {
         e.preventDefault();
-        self.search($('#category').val(), $('#country').val(), $('#city_canada').val())
+        self.search($('#category').val(), $('#country').val(), $('#city_Canada').val())
         .done(function(results) {
           self.renderResults_(results);
         });
@@ -99,15 +100,49 @@ app.Search.prototype.renderResults_ = function(results) {
     
     $('#results').children(':not(.template)').remove();
     
+    if (!results)
+        return;
+
     for (var i = results.length - 1; i >= 0; i--) {
         var item = template.clone(false, false);
+        item.data('id', results[i].facebook_id);
         item.find('.name').text(results[i].name);
-        item.find('.name').text(results[i].name);
-        item.find('.name').text(results[i].name);
-        item.find('.name').text(results[i].name);
-        item.appendTo('#results');
+        item.find('.name').attr('href', 'service.php?id=' + results[i].facebook_id);
+        item.find('.city').text(results[i].city);
+        item.find('.country').text(results[i].country);
+        item.find('.category').text(results[i].category);
+        item.find('.average-rating').text(results[i].average_rating ? parseFloat(results[i].average_rating, 2) : 'N/A');
+        item.removeClass('template').appendTo('#results');
     };
+};
 
+app.Search.prototype.executeIfAuthorized_ = function(callback, askForLogin){
+    var self = this;
+    
+    if(askForLogin === undefined)
+        askForLogin = true;
+
+    // if user already logged in
+    if(self.userIsAuthorized_)
+        callback();
+    else {
+        FB.getLoginStatus(function(response) {
+            if (response.authResponse) {
+                self.userIsAuthorized_ = true;
+                callback();
+            } else if (askForLogin) {
+                FB.login(function(response) {
+                    if (response.authResponse) {
+                        self.userIsAuthorized_ = true;
+                        callback();     
+                    } else {
+                        callback();
+                    }
+                }, { scope: 'publish_actions, friends_actions:' + app.configuration.ogNamespace + ', user_actions:' + app.configuration.ogNamespace });
+            } else 
+                callback();
+        });
+    }
 };
 
 app.Search.prototype.search = function(category, country, city) {
@@ -124,7 +159,21 @@ app.Search.prototype.search = function(category, country, city) {
 };
 
 app.Search.prototype.rate = function(facebookId, serviceProviderId, rating) {
-    
+    var self = this;
+
+    self.executeIfAuthorized_(function() {
+        FB.api('/me/' + app.configuration.ogNamespace + ':rate', 
+            'post',
+            {
+                service: app.configuration.baseUrl + 'canvas/service.php?id=' + serviceProviderId,
+                rating: rating,
+                review: ''
+            },
+            function(data) {
+                console.log(arguments);
+            });
+    });
+
     return $.ajax({
         type: 'GET',
         data: {
