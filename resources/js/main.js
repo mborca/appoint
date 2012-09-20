@@ -3,7 +3,7 @@ var app = app || {};
 app.configuration = app.configuration || {
     ogUrl: 'https://fbapps.my.phpcloud.com/appoint/service.html',
     baseUrl: 'https://appt.cossette.com/',
-    appId: '',
+    appId: '416854151706592',
     ogNamespace: 'appointments-app',
     userId: ''
 };
@@ -259,4 +259,85 @@ app.MyService.prototype.save = function() {
         url: this.dom_.form.attr('action'),
         dataType: 'json'
     });
+};
+
+app.Service = function(serviceProviderId) {
+    
+    this.userIsAuthorized_ = false;
+    this.serviceProviderId = serviceProviderId;
+    this.mapDom_();
+    this.init_();
+    this.bindEvents_();
+};
+
+app.Service.prototype.init_ = function() {
+    
+};
+
+app.Service.prototype.mapDom_ = function() {
+    this.dom_ = {};
+};
+
+app.Service.prototype.bindEvents_ = function() {
+    var self = this;
+
+    $('table').on('click', 'td', function(){
+        var me = $(this),
+            id = me.data('id'),
+            action = me.data('action'),
+            since = me.data('since'),
+            until = me.data('until');
+
+
+        if (!action)
+            return;
+        
+
+        $.ajax({
+            type: 'GET',
+            data: {
+                start_date: since,
+                end_date: until,
+                service_provider_facebook_id: self.serviceProviderId,
+                user_email: 'email@email.com',
+                user_facebook_id: 1517375131,
+                user_firstname: 'test',
+                user_lastname: 'test2'
+            },
+            url: app.configuration.baseUrl + 'services/book.php',
+            dataType: 'json'
+        }).always(function(){
+            me.css('background-color', 'green');
+        });
+
+    });
+};
+
+app.Service.prototype.executeIfAuthorized_ = function(callback, askForLogin){
+    var self = this;
+    
+    if(askForLogin === undefined)
+        askForLogin = true;
+
+    // if user already logged in
+    if(self.userIsAuthorized_)
+        callback();
+    else {
+        FB.getLoginStatus(function(response) {
+            if (response.authResponse) {
+                self.userIsAuthorized_ = true;
+                callback();
+            } else if (askForLogin) {
+                FB.login(function(response) {
+                    if (response.authResponse) {
+                        self.userIsAuthorized_ = true;
+                        callback();
+                    } else {
+                        callback();
+                    }
+                });
+            } else 
+                callback();
+        });
+    }
 };
