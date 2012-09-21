@@ -44,8 +44,8 @@
             <option value="Washington">Washington</option>
             <option value="San-francisco">San Francisco</option>
         </select><br/>
-        <input type="button" value="Cancel" />
-        <input type="submit" value="Save" />
+        <input style="display: none;" type="button" value="Cancel" />
+        <input style="margin-left: 130px; background-color: darkblue; color: white;" type="submit" value="Save" />
     </form>
 </div>
 <?php include('../includes/scripts.php'); ?>

@@ -32,7 +32,7 @@
                 <option value="washington">Washington</option>
                 <option value="san-francisco">San Francisco</option>
             </select>
-            <input type="submit" value="Search" />
+            <input style="background-color: darkblue; color: white;" type="submit" value="Search" />
         </form>
         <ul id="results">
             <li id="service-11101" data-id="11101" class="template">

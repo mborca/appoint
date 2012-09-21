@@ -1,5 +1,5 @@
 a {
-    color: #333;
+    color: darkblue;
     text-decoration: none
 }
 
@@ -10,10 +10,12 @@ a:hover {
 nav li {
     display: inline-block;
     padding: 10px;
+    text-transform: uppercase;
+    font-weight: bold;
 }
 
-nav li.selected a {
-    color: #ff0000;
+.selected {
+    color: blue;
 }
 
 label {
@@ -26,8 +28,9 @@ label, input, select {
     margin: 10px;
 }
 
+
 #page-myservice form {
-    text-align: center;
+    margin-left: 200px;
 }
 
 .template {
@@ -65,3 +68,8 @@ label, input, select {
     background: #EEE;
     border: 1px solid #DDD;
 }
+
+table { width: 50%; margin-left: 100px; }
+table td { width: 80px; }
+
+#categories { padding-left: 30px; box-sizing: border-box; list-style-type:none;}
