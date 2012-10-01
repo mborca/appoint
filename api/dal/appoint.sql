@@ -32,7 +32,7 @@ CREATE TABLE `rating` (
   PRIMARY KEY (`id`),
   KEY `fk_review_service_provider_idx` (`service_provider_facebook_id`),
   CONSTRAINT `fk_review_service_provider` FOREIGN KEY (`service_provider_facebook_id`) REFERENCES `service_provider` (`facebook_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,7 +41,7 @@ CREATE TABLE `rating` (
 
 LOCK TABLES `rating` WRITE;
 /*!40000 ALTER TABLE `rating` DISABLE KEYS */;
-INSERT INTO `rating` VALUES (4,1111999,1111999,5),(5,1111999,1112,1);
+INSERT INTO `rating` VALUES (1,1517375131,1517375131,2),(2,1517375131,1,3),(3,1517375131,2,5);
 /*!40000 ALTER TABLE `rating` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -79,7 +79,7 @@ CREATE TABLE `service_provider` (
 
 LOCK TABLES `service_provider` WRITE;
 /*!40000 ALTER TABLE `service_provider` DISABLE KEYS */;
-INSERT INTO `service_provider` VALUES (11101,'Barber','My Barber Shop','Ohh yeah! Best hair cut','Canada','Qc','Montreal','2222 rue St-Cathrine H3G 1X1','1-514-999-9999','mybarbershop@barber.ca',-73.576851,45.499817,NULL),(11102,'Accounting','My Accounting Shop','Accounting Description','Canada','Qc','Montreal','123 rue Bishop H3G 2X2','1-514-888-8888','myaccounting@accounting.ca',-73.577011,45.498888,NULL),(11103,'Barber','XYZ','hehehe','Canada','On','Ottawa','789 nothing street ','9-999-999-9999','test@tets.ca',-73.012346,45.001235,NULL),(1111999,'category test','name test',NULL,'country test',NULL,'city test','adresse test','514-999-9999','test@test.ca',NULL,NULL,3.00000);
+INSERT INTO `service_provider` VALUES (1000,'Barber','H D Mandrak Barber Shop\nH D Mandrak Barber Shop',NULL,'Canada','Quebec','Montreal','1967, rue Jean-Talon E, Montréal, QC H2E 1T9','514-722-3111','email1@test.com',NULL,NULL,NULL),(1001,'Barber','Barbier Manuel Baeza\n',NULL,'Canada','Quebec','Montreal','716, rue Gilford, Montréal, QC H2J 1N6','514-524-0068','email2@test.com',NULL,NULL,NULL),(1002,'Barber','Shoppers City East Barber Shop\nShoppers City East Barber Shop\n',NULL,'Canada','Ontario','Ottawa','2018 Ogilvie Rd, Gloucester, ON K1J 7N9','613-746-8968','email3@test.com',NULL,NULL,NULL),(1003,'Dentist','Adams Orthodontics',NULL,'Canada','Ontario','Ottawa','2150 Montreal Rd, Gloucester, ON K1J 6M7','613-800-1136','email4@test.com',NULL,NULL,NULL),(1004,'Dentist','Al-Mulla Mahdy Dr\n',NULL,'Canada','Ontario','Ottawa','2446 Bank St, Ottawa, ON','613-321-2610','email5@test.com',NULL,NULL,NULL),(1005,'Dentist','Associated Dental Care',NULL,'Canada','Ontario','Ottawa','2269 Riverside Dr, Ottawa, ON K1H 8K2','613-737-4944','email6@test.com',NULL,NULL,NULL),(1006,'Dentist','A La Clinique Dentaire St-Denis',NULL,'Canada','Quebec','Montreal','6915, rue Saint-Denis, Montréal, QC H2S 2S3','514-273-3368','email7@test.com',NULL,NULL,NULL),(1007,'Barber','Bcn Cuts. Barber Shop',NULL,'Spain',NULL,'Barcelona','Gran de Gracia 223, 08012 Barcelona','+34 93 611 1813','email8@test.com',NULL,NULL,NULL),(1008,'Financial','BCG',NULL,'Spain',NULL,'Barcelona','Avda. Diagonal, 640 - 4°A \nBarcelona 8017 Spain','+34 93 363 47 00','email9@test.com',NULL,NULL,NULL),(1009,'Financial','Egon Zehnder International',NULL,'Spain',NULL,'Madrid','123 Madrid','915 314 115','email10@test.com',NULL,NULL,NULL),(1517375131,'Dentist','Marian CO',NULL,'Canada','Quebec','Montreal','2100 rue Drummond Qc H4X 1X1','15148037957','email11@test.com',NULL,NULL,3.33333);
 /*!40000 ALTER TABLE `service_provider` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -103,7 +103,7 @@ CREATE TABLE `appointment` (
   KEY `fk_serviceprovider_appointment_idx` (`service_provider_facebook_id`),
   KEY `idx_appointment_appointment_date` (`start_date`),
   CONSTRAINT `fk_serviceprovider_appointment` FOREIGN KEY (`service_provider_facebook_id`) REFERENCES `service_provider` (`facebook_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -112,7 +112,7 @@ CREATE TABLE `appointment` (
 
 LOCK TABLES `appointment` WRITE;
 /*!40000 ALTER TABLE `appointment` DISABLE KEYS */;
-INSERT INTO `appointment` VALUES (2,11101,222222,'Doruk','Vardaryildiz','doruk.vardaryildiz@gmail.com','2012-09-13 00:00:00','0000-00-00 00:00:00'),(4,11101,222222,'Doruk','Vardaryildiz','doruk.vardaryildiz@gmail.com','2012-09-13 01:00:00','0000-00-00 00:00:00'),(5,11101,123456,'Doruk','Vardaryildiz','doruk.vardaryildiz@cossette.com','2012-09-18 00:00:00','2012-09-18 01:00:00'),(6,11101,123456,'Doruk','Vardaryildiz','doruk.vardaryildiz@cossette.com','2012-09-18 02:00:00','2012-09-18 03:00:00');
+INSERT INTO `appointment` VALUES (7,1517375131,1517375131,'Marian','Borca','mborca@gmail.com','2012-09-24 13:00:00','2012-09-24 14:00:00'),(8,1517375131,9001,'Maxime','Gagne','email12@test.com','2012-09-24 11:00:00','2012-09-24 12:00:00'),(9,1517375131,9002,'Ugo','Tessier','email13@test.com','2012-09-25 13:00:00','2012-09-25 14:00:00'),(10,1517375131,9003,'Doruk','Vardaryildiz','email14@test.com','2012-09-26 16:00:00','2012-09-27 17:00:00');
 /*!40000 ALTER TABLE `appointment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -176,6 +176,34 @@ SET p_miles = CEILING(p_miles);
 
 RETURN ( p_miles );
 
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `appointment_check` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = '' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50020 DEFINER=`root`@`localhost`*/ /*!50003 PROCEDURE `appointment_check`(
+    p_service_provider_facebook_id bigint,
+    p_start_date datetime,
+    p_end_date datetime
+)
+BEGIN
+    DECLARE _id int DEFAULT 0;
+    SELECT user_facebook_id INTO _id FROM appointment
+        WHERE service_provider_facebook_id = p_service_provider_facebook_id
+        AND start_date >= p_start_date
+        AND end_date <= p_end_date;
+    SELECT _id;
 END */;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -307,11 +335,11 @@ BEGIN
 	SELECT *
 	FROM `service_provider`
 	WHERE 
-			(p_category IS NULL OR  `category` = p_category)
+			(p_category IS NULL OR p_category = '' OR  `category` = p_category)
 			AND
-			(p_country IS NULL OR `country`= p_country)
+			(p_country IS NULL OR  p_country = '' OR `country`= p_country)
 			AND
-			(p_city IS NULL OR `city` = p_city)
+			(p_city IS NULL OR p_city= '' OR `city` = p_city)
 	ORDER BY `average_rating` DESC;
 END */;;
 DELIMITER ;
@@ -334,12 +362,16 @@ DELIMITER ;;
 		p_facebook_id BIGINT, 
 		p_service_provider_facebook_id BIGINT)
 BEGIN
-IF( EXISTS(SELECT * FROM  rating WHERE facebook_id=p_facebook_id))
+	DECLARE _total_rating INT;
+	DECLARE _count_rating INT;
+	DECLARE _average_rating DECIMAL(6,5);
+IF( EXISTS(SELECT * FROM  rating WHERE facebook_id=p_facebook_id AND service_provider_facebook_id = p_service_provider_facebook_id))
 THEN
 
 	UPDATE `rating`
 	SET `rating`.`rating` = p_rating
-	WHERE facebook_id = p_facebook_id;
+	WHERE facebook_id = p_facebook_id AND service_provider_facebook_id =p_service_provider_facebook_id;
+
 
 ELSE
 	INSERT INTO `rating`(`rating`,`facebook_id`,`service_provider_facebook_id`)
@@ -349,7 +381,44 @@ ELSE
 
 END IF;
 
-	CALL service_provider_update_rating(p_service_provider_facebook_id);
+	SET _total_rating = 0;
+
+	SET _total_rating = (	SELECT SUM(rating)
+							FROM `rating`
+							WHERE `service_provider_facebook_id` = p_service_provider_facebook_id
+							);
+
+	SET _count_rating = (SELECT count(*) FROM `rating` WHERE `service_provider_facebook_id` = p_service_provider_facebook_id);
+
+	SET  _average_rating = (SELECT CAST(_total_rating / _count_rating AS DECIMAL(6,5)));
+
+	UPDATE `service_provider`
+	SET average_rating = _average_rating
+	WHERE facebook_id = p_service_provider_facebook_id;
+
+	SELECT _average_rating;
+
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `service_provider_delete` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = '' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50020 DEFINER=`root`@`localhost`*/ /*!50003 PROCEDURE `service_provider_delete`(p_facebook_id BIGINT)
+BEGIN
+
+	DELETE FROM service_provider
+	WHERE facebook_id = p_facebook_id;
 
 END */;;
 DELIMITER ;
@@ -489,4 +558,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2012-09-18 15:48:06
+-- Dump completed on 2012-10-01 16:03:20
