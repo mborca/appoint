@@ -1,8 +1,10 @@
 var app = app || {};
 
 app.configuration = app.configuration || {
-    ogUrl: 'https://appt.cossette.com/service.html',
-    baseUrl: 'https://appt.cossette.com/',
+    //ogUrl: 'https://appt.cossette.com/service.html',
+    //baseUrl: 'https://appt.cossette.com/',
+    ogUrl: 'http://localhost:8888/appoint/service.html',
+    baseUrl: 'http://localhost:8888/appoint/',
     appId: '416854151706592',
     ogNamespace: 'appointments-app',
     userId: ''
