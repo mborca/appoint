@@ -245,7 +245,7 @@ app.MyService.prototype.bindEvents_ = function() {
         
         self.save().done(function() {
           self.saveSuccess_();
-        });;
+        });
     });
 };
 
