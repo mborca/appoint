@@ -7,7 +7,7 @@ function api_autoloader($class_name)
 {
     if(starts_with(strtolower($class_name), 'db_'))
         require_once "../api/dal/".strtolower($class_name).'.class.php';
-    else
+    else if (stristr($class_name, 'twilio') === FALSE) //(strtolower($class_name) )
         require_once "../api/model/".strtolower($class_name).'.class.php';
 }
 spl_autoload_register('api_autoloader');
