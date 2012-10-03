@@ -1,4 +1,4 @@
-CREATE DATABASE  IF NOT EXISTS `appoint` /*!40100 DEFAULT CHARACTER SET utf8 */;
+CREATE DATABASE  IF NOT EXISTS `appoint`  DEFAULT CHARACTER SET utf8 ;
 USE `appoint`;
 -- MySQL dump 10.13  Distrib 5.5.9, for osx10.6 (i386)
 --
@@ -6,24 +6,24 @@ USE `appoint`;
 -- ------------------------------------------------------
 -- Server version	5.5.9
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+ SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT ;
+ SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS ;
+ SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION ;
+ SET NAMES utf8 ;
+ SET @OLD_TIME_ZONE=@@TIME_ZONE ;
+ SET TIME_ZONE='+00:00' ;
+ SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 ;
+ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 ;
+ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' ;
+ SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 ;
 
 --
 -- Table structure for table `rating`
 --
 
 DROP TABLE IF EXISTS `rating`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+ SET @saved_cs_client     = @@character_set_client ;
+ SET character_set_client = utf8 ;
 CREATE TABLE `rating` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `service_provider_facebook_id` bigint(20) NOT NULL,
@@ -33,16 +33,16 @@ CREATE TABLE `rating` (
   KEY `fk_review_service_provider_idx` (`service_provider_facebook_id`),
   CONSTRAINT `fk_review_service_provider` FOREIGN KEY (`service_provider_facebook_id`) REFERENCES `service_provider` (`facebook_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+ SET character_set_client = @saved_cs_client ;
 
 --
 -- Dumping data for table `rating`
 --
 
 LOCK TABLES `rating` WRITE;
-/*!40000 ALTER TABLE `rating` DISABLE KEYS */;
+ ALTER TABLE `rating` DISABLE KEYS ;
 INSERT INTO `rating` VALUES (1,1517375131,1517375131,2),(2,1517375131,1,3),(3,1517375131,2,5);
-/*!40000 ALTER TABLE `rating` ENABLE KEYS */;
+ ALTER TABLE `rating` ENABLE KEYS ;
 UNLOCK TABLES;
 
 --
@@ -50,8 +50,8 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `service_provider`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+ SET @saved_cs_client     = @@character_set_client ;
+ SET character_set_client = utf8 ;
 CREATE TABLE `service_provider` (
   `facebook_id` bigint(20) NOT NULL,
   `category` varchar(512) NOT NULL,
@@ -71,16 +71,16 @@ CREATE TABLE `service_provider` (
   KEY `idx_service_provider_latitude` (`latitude`),
   KEY `idx_service_provider_longitude` (`longitude`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+ SET character_set_client = @saved_cs_client ;
 
 --
 -- Dumping data for table `service_provider`
 --
 
 LOCK TABLES `service_provider` WRITE;
-/*!40000 ALTER TABLE `service_provider` DISABLE KEYS */;
-INSERT INTO `service_provider` VALUES (1000,'Barber','H D Mandrak Barber Shop\nH D Mandrak Barber Shop',NULL,'Canada','Quebec','Montreal','1967, rue Jean-Talon E, Montréal, QC H2E 1T9','514-722-3111','email1@test.com',NULL,NULL,NULL),(1001,'Barber','Barbier Manuel Baeza\n',NULL,'Canada','Quebec','Montreal','716, rue Gilford, Montréal, QC H2J 1N6','514-524-0068','email2@test.com',NULL,NULL,NULL),(1002,'Barber','Shoppers City East Barber Shop\nShoppers City East Barber Shop\n',NULL,'Canada','Ontario','Ottawa','2018 Ogilvie Rd, Gloucester, ON K1J 7N9','613-746-8968','email3@test.com',NULL,NULL,NULL),(1003,'Dentist','Adams Orthodontics',NULL,'Canada','Ontario','Ottawa','2150 Montreal Rd, Gloucester, ON K1J 6M7','613-800-1136','email4@test.com',NULL,NULL,NULL),(1004,'Dentist','Al-Mulla Mahdy Dr\n',NULL,'Canada','Ontario','Ottawa','2446 Bank St, Ottawa, ON','613-321-2610','email5@test.com',NULL,NULL,NULL),(1005,'Dentist','Associated Dental Care',NULL,'Canada','Ontario','Ottawa','2269 Riverside Dr, Ottawa, ON K1H 8K2','613-737-4944','email6@test.com',NULL,NULL,NULL),(1006,'Dentist','A La Clinique Dentaire St-Denis',NULL,'Canada','Quebec','Montreal','6915, rue Saint-Denis, Montréal, QC H2S 2S3','514-273-3368','email7@test.com',NULL,NULL,NULL),(1007,'Barber','Bcn Cuts. Barber Shop',NULL,'Spain',NULL,'Barcelona','Gran de Gracia 223, 08012 Barcelona','+34 93 611 1813','email8@test.com',NULL,NULL,NULL),(1008,'Financial','BCG',NULL,'Spain',NULL,'Barcelona','Avda. Diagonal, 640 - 4°A \nBarcelona 8017 Spain','+34 93 363 47 00','email9@test.com',NULL,NULL,NULL),(1009,'Financial','Egon Zehnder International',NULL,'Spain',NULL,'Madrid','123 Madrid','915 314 115','email10@test.com',NULL,NULL,NULL),(1517375131,'Dentist','Marian CO',NULL,'Canada','Quebec','Montreal','2100 rue Drummond Qc H4X 1X1','15148037957','email11@test.com',NULL,NULL,3.33333);
-/*!40000 ALTER TABLE `service_provider` ENABLE KEYS */;
+ ALTER TABLE `service_provider` DISABLE KEYS ;
+INSERT INTO `service_provider` VALUES (1000,'Barber','H D Mandrak Barber Shop\nH D Mandrak Barber Shop',NULL,'Canada','Quebec','Montreal','1967, rue Jean-Talon E, Montr√©al, QC H2E 1T9','514-722-3111','email1@test.com',NULL,NULL,NULL),(1001,'Barber','Barbier Manuel Baeza\n',NULL,'Canada','Quebec','Montreal','716, rue Gilford, Montr√©al, QC H2J 1N6','514-524-0068','email2@test.com',NULL,NULL,NULL),(1002,'Barber','Shoppers City East Barber Shop\nShoppers City East Barber Shop\n',NULL,'Canada','Ontario','Ottawa','2018 Ogilvie Rd, Gloucester, ON K1J 7N9','613-746-8968','email3@test.com',NULL,NULL,NULL),(1003,'Dentist','Adams Orthodontics',NULL,'Canada','Ontario','Ottawa','2150 Montreal Rd, Gloucester, ON K1J 6M7','613-800-1136','email4@test.com',NULL,NULL,NULL),(1004,'Dentist','Al-Mulla Mahdy Dr\n',NULL,'Canada','Ontario','Ottawa','2446 Bank St, Ottawa, ON','613-321-2610','email5@test.com',NULL,NULL,NULL),(1005,'Dentist','Associated Dental Care',NULL,'Canada','Ontario','Ottawa','2269 Riverside Dr, Ottawa, ON K1H 8K2','613-737-4944','email6@test.com',NULL,NULL,NULL),(1006,'Dentist','A La Clinique Dentaire St-Denis',NULL,'Canada','Quebec','Montreal','6915, rue Saint-Denis, Montr√©al, QC H2S 2S3','514-273-3368','email7@test.com',NULL,NULL,NULL),(1007,'Barber','Bcn Cuts. Barber Shop',NULL,'Spain',NULL,'Barcelona','Gran de Gracia 223, 08012 Barcelona','+34 93 611 1813','email8@test.com',NULL,NULL,NULL),(1008,'Financial','BCG',NULL,'Spain',NULL,'Barcelona','Avda. Diagonal, 640 - 4¬∞A \nBarcelona 8017 Spain','+34 93 363 47 00','email9@test.com',NULL,NULL,NULL),(1009,'Financial','Egon Zehnder International',NULL,'Spain',NULL,'Madrid','123 Madrid','915 314 115','email10@test.com',NULL,NULL,NULL),(1517375131,'Dentist','Marian CO',NULL,'Canada','Quebec','Montreal','2100 rue Drummond Qc H4X 1X1','15148037957','email11@test.com',NULL,NULL,3.33333);
+ ALTER TABLE `service_provider` ENABLE KEYS ;
 UNLOCK TABLES;
 
 --
@@ -88,8 +88,8 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `appointment`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+ SET @saved_cs_client     = @@character_set_client ;
+ SET character_set_client = utf8 ;
 CREATE TABLE `appointment` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `service_provider_facebook_id` bigint(20) NOT NULL,
@@ -104,32 +104,32 @@ CREATE TABLE `appointment` (
   KEY `idx_appointment_appointment_date` (`start_date`),
   CONSTRAINT `fk_serviceprovider_appointment` FOREIGN KEY (`service_provider_facebook_id`) REFERENCES `service_provider` (`facebook_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+ SET character_set_client = @saved_cs_client ;
 
 --
 -- Dumping data for table `appointment`
 --
 
 LOCK TABLES `appointment` WRITE;
-/*!40000 ALTER TABLE `appointment` DISABLE KEYS */;
+ ALTER TABLE `appointment` DISABLE KEYS ;
 INSERT INTO `appointment` VALUES (7,1517375131,1517375131,'Marian','Borca','mborca@gmail.com','2012-09-24 13:00:00','2012-09-24 14:00:00'),(8,1517375131,9001,'Maxime','Gagne','email12@test.com','2012-09-24 11:00:00','2012-09-24 12:00:00'),(9,1517375131,9002,'Ugo','Tessier','email13@test.com','2012-09-25 13:00:00','2012-09-25 14:00:00'),(10,1517375131,9003,'Doruk','Vardaryildiz','email14@test.com','2012-09-26 16:00:00','2012-09-27 17:00:00');
-/*!40000 ALTER TABLE `appointment` ENABLE KEYS */;
+ ALTER TABLE `appointment` ENABLE KEYS ;
 UNLOCK TABLES;
 
 --
 -- Dumping routines for database 'appoint'
 --
-/*!50003 DROP FUNCTION IF EXISTS `distance` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = '' */ ;
+ DROP FUNCTION IF EXISTS `distance` ;
+ SET @saved_cs_client      = @@character_set_client  ;
+ SET @saved_cs_results     = @@character_set_results  ;
+ SET @saved_col_connection = @@collation_connection  ;
+ SET character_set_client  = utf8  ;
+ SET character_set_results = utf8  ;
+ SET collation_connection  = utf8_general_ci  ;
+ SET @saved_sql_mode       = @@sql_mode  ;
+ SET sql_mode              = ''  ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50020 DEFINER=`root`@`localhost`*/ /*!50003 FUNCTION `distance`(p_lat1 FLOAT , p_long1 FLOAT , p_lat2 FLOAT , p_long2 FLOAT) RETURNS float
+ CREATE  DEFINER=`root`@`localhost`  FUNCTION `distance`(p_lat1 FLOAT , p_long1 FLOAT , p_lat2 FLOAT , p_long2 FLOAT) RETURNS float
 BEGIN
 --
 -- This routine calculates the distance between two points (given the
@@ -176,23 +176,23 @@ SET p_miles = CEILING(p_miles);
 
 RETURN ( p_miles );
 
-END */;;
+END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `appointment_check` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = '' */ ;
+ SET sql_mode              = @saved_sql_mode  ;
+ SET character_set_client  = @saved_cs_client  ;
+ SET character_set_results = @saved_cs_results  ;
+ SET collation_connection  = @saved_col_connection  ;
+ DROP PROCEDURE IF EXISTS `appointment_check` ;
+ SET @saved_cs_client      = @@character_set_client  ;
+ SET @saved_cs_results     = @@character_set_results  ;
+ SET @saved_col_connection = @@collation_connection  ;
+ SET character_set_client  = utf8  ;
+ SET character_set_results = utf8  ;
+ SET collation_connection  = utf8_general_ci  ;
+ SET @saved_sql_mode       = @@sql_mode  ;
+ SET sql_mode              = ''  ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50020 DEFINER=`root`@`localhost`*/ /*!50003 PROCEDURE `appointment_check`(
+ CREATE  DEFINER=`root`@`localhost`  PROCEDURE `appointment_check`(
     p_service_provider_facebook_id bigint,
     p_start_date datetime,
     p_end_date datetime
@@ -204,64 +204,64 @@ BEGIN
         AND start_date >= p_start_date
         AND end_date <= p_end_date;
     SELECT _id;
-END */;;
+END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `appointment_delete` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = '' */ ;
+ SET sql_mode              = @saved_sql_mode  ;
+ SET character_set_client  = @saved_cs_client  ;
+ SET character_set_results = @saved_cs_results  ;
+ SET collation_connection  = @saved_col_connection  ;
+ DROP PROCEDURE IF EXISTS `appointment_delete` ;
+ SET @saved_cs_client      = @@character_set_client  ;
+ SET @saved_cs_results     = @@character_set_results  ;
+ SET @saved_col_connection = @@collation_connection  ;
+ SET character_set_client  = utf8  ;
+ SET character_set_results = utf8  ;
+ SET collation_connection  = utf8_general_ci  ;
+ SET @saved_sql_mode       = @@sql_mode  ;
+ SET sql_mode              = ''  ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50020 DEFINER=`root`@`localhost`*/ /*!50003 PROCEDURE `appointment_delete`(p_id INT)
+ CREATE  DEFINER=`root`@`localhost`  PROCEDURE `appointment_delete`(p_id INT)
 BEGIN
 	DELETE FROM appointment
 	WHERE id = p_id;
-END */;;
+END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `appointment_get_all` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = '' */ ;
+ SET sql_mode              = @saved_sql_mode  ;
+ SET character_set_client  = @saved_cs_client  ;
+ SET character_set_results = @saved_cs_results  ;
+ SET collation_connection  = @saved_col_connection  ;
+ DROP PROCEDURE IF EXISTS `appointment_get_all` ;
+ SET @saved_cs_client      = @@character_set_client  ;
+ SET @saved_cs_results     = @@character_set_results  ;
+ SET @saved_col_connection = @@collation_connection  ;
+ SET character_set_client  = utf8  ;
+ SET character_set_results = utf8  ;
+ SET collation_connection  = utf8_general_ci  ;
+ SET @saved_sql_mode       = @@sql_mode  ;
+ SET sql_mode              = ''  ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50020 DEFINER=`root`@`localhost`*/ /*!50003 PROCEDURE `appointment_get_all`(p_facebook_id BIGINT)
+ CREATE  DEFINER=`root`@`localhost`  PROCEDURE `appointment_get_all`(p_facebook_id BIGINT)
 BEGIN
 	SELECT *
 	FROM appointment
 	WHERE service_provider_facebook_id = p_facebook_id ;
-END */;;
+END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `appointment_get_by_date` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = '' */ ;
+ SET sql_mode              = @saved_sql_mode  ;
+ SET character_set_client  = @saved_cs_client  ;
+ SET character_set_results = @saved_cs_results  ;
+ SET collation_connection  = @saved_col_connection  ;
+ DROP PROCEDURE IF EXISTS `appointment_get_by_date` ;
+ SET @saved_cs_client      = @@character_set_client  ;
+ SET @saved_cs_results     = @@character_set_results  ;
+ SET @saved_col_connection = @@collation_connection  ;
+ SET character_set_client  = utf8  ;
+ SET character_set_results = utf8  ;
+ SET collation_connection  = utf8_general_ci  ;
+ SET @saved_sql_mode       = @@sql_mode  ;
+ SET sql_mode              = ''  ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50020 DEFINER=`root`@`localhost`*/ /*!50003 PROCEDURE `appointment_get_by_date`(
+ CREATE  DEFINER=`root`@`localhost`  PROCEDURE `appointment_get_by_date`(
 		p_facebook_id BIGINT,
 		p_start_date DATETIME, 
 		p_end_date DATETIME)
@@ -270,23 +270,23 @@ BEGIN
 	FROM appointment
 	WHERE service_provider_facebook_id = p_facebook_id 
 			AND start_date >= p_start_date AND end_date <=p_end_date;
-END */;;
+END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `appointment_insert` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = '' */ ;
+ SET sql_mode              = @saved_sql_mode  ;
+ SET character_set_client  = @saved_cs_client  ;
+ SET character_set_results = @saved_cs_results  ;
+ SET collation_connection  = @saved_col_connection  ;
+ DROP PROCEDURE IF EXISTS `appointment_insert` ;
+ SET @saved_cs_client      = @@character_set_client  ;
+ SET @saved_cs_results     = @@character_set_results  ;
+ SET @saved_col_connection = @@collation_connection  ;
+ SET character_set_client  = utf8  ;
+ SET character_set_results = utf8  ;
+ SET collation_connection  = utf8_general_ci  ;
+ SET @saved_sql_mode       = @@sql_mode  ;
+ SET sql_mode              = ''  ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50020 DEFINER=`root`@`localhost`*/ /*!50003 PROCEDURE `appointment_insert`(
+ CREATE  DEFINER=`root`@`localhost`  PROCEDURE `appointment_insert`(
 		p_start_date DATETIME,
 		p_end_date DATETIME,
 		p_service_provider_facebook_id BIGINT,
@@ -307,23 +307,23 @@ BEGIN
 		SELECT LAST_INSERT_ID();
 	END IF;
 
-END */;;
+END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `appointment_search` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = '' */ ;
+ SET sql_mode              = @saved_sql_mode  ;
+ SET character_set_client  = @saved_cs_client  ;
+ SET character_set_results = @saved_cs_results  ;
+ SET collation_connection  = @saved_col_connection  ;
+ DROP PROCEDURE IF EXISTS `appointment_search` ;
+ SET @saved_cs_client      = @@character_set_client  ;
+ SET @saved_cs_results     = @@character_set_results  ;
+ SET @saved_col_connection = @@collation_connection  ;
+ SET character_set_client  = utf8  ;
+ SET character_set_results = utf8  ;
+ SET collation_connection  = utf8_general_ci  ;
+ SET @saved_sql_mode       = @@sql_mode  ;
+ SET sql_mode              = ''  ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50020 DEFINER=`root`@`localhost`*/ /*!50003 PROCEDURE `appointment_search`(
+ CREATE  DEFINER=`root`@`localhost`  PROCEDURE `appointment_search`(
 	p_category VARCHAR(512),
 	p_country VARCHAR(512),
 	p_city VARCHAR(512)
@@ -341,23 +341,23 @@ BEGIN
 			AND
 			(p_city IS NULL OR p_city= '' OR `city` = p_city)
 	ORDER BY `average_rating` DESC;
-END */;;
+END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `rating_register` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = '' */ ;
+ SET sql_mode              = @saved_sql_mode  ;
+ SET character_set_client  = @saved_cs_client  ;
+ SET character_set_results = @saved_cs_results  ;
+ SET collation_connection  = @saved_col_connection  ;
+ DROP PROCEDURE IF EXISTS `rating_register` ;
+ SET @saved_cs_client      = @@character_set_client  ;
+ SET @saved_cs_results     = @@character_set_results  ;
+ SET @saved_col_connection = @@collation_connection  ;
+ SET character_set_client  = utf8  ;
+ SET character_set_results = utf8  ;
+ SET collation_connection  = utf8_general_ci  ;
+ SET @saved_sql_mode       = @@sql_mode  ;
+ SET sql_mode              = ''  ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50020 DEFINER=`root`@`localhost`*/ /*!50003 PROCEDURE `rating_register`(
+ CREATE  DEFINER=`root`@`localhost`  PROCEDURE `rating_register`(
 		p_rating INT , 
 		p_facebook_id BIGINT, 
 		p_service_provider_facebook_id BIGINT)
@@ -398,66 +398,66 @@ END IF;
 
 	SELECT _average_rating;
 
-END */;;
+END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `service_provider_delete` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = '' */ ;
+ SET sql_mode              = @saved_sql_mode  ;
+ SET character_set_client  = @saved_cs_client  ;
+ SET character_set_results = @saved_cs_results  ;
+ SET collation_connection  = @saved_col_connection  ;
+ DROP PROCEDURE IF EXISTS `service_provider_delete` ;
+ SET @saved_cs_client      = @@character_set_client  ;
+ SET @saved_cs_results     = @@character_set_results  ;
+ SET @saved_col_connection = @@collation_connection  ;
+ SET character_set_client  = utf8  ;
+ SET character_set_results = utf8  ;
+ SET collation_connection  = utf8_general_ci  ;
+ SET @saved_sql_mode       = @@sql_mode  ;
+ SET sql_mode              = ''  ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50020 DEFINER=`root`@`localhost`*/ /*!50003 PROCEDURE `service_provider_delete`(p_facebook_id BIGINT)
+ CREATE  DEFINER=`root`@`localhost`  PROCEDURE `service_provider_delete`(p_facebook_id BIGINT)
 BEGIN
 
 	DELETE FROM service_provider
 	WHERE facebook_id = p_facebook_id;
 
-END */;;
+END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `service_provider_get` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = '' */ ;
+ SET sql_mode              = @saved_sql_mode  ;
+ SET character_set_client  = @saved_cs_client  ;
+ SET character_set_results = @saved_cs_results  ;
+ SET collation_connection  = @saved_col_connection  ;
+ DROP PROCEDURE IF EXISTS `service_provider_get` ;
+ SET @saved_cs_client      = @@character_set_client  ;
+ SET @saved_cs_results     = @@character_set_results  ;
+ SET @saved_col_connection = @@collation_connection  ;
+ SET character_set_client  = utf8  ;
+ SET character_set_results = utf8  ;
+ SET collation_connection  = utf8_general_ci  ;
+ SET @saved_sql_mode       = @@sql_mode  ;
+ SET sql_mode              = ''  ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50020 DEFINER=`root`@`localhost`*/ /*!50003 PROCEDURE `service_provider_get`(p_facebook_id BIGINT)
+ CREATE  DEFINER=`root`@`localhost`  PROCEDURE `service_provider_get`(p_facebook_id BIGINT)
 BEGIN
 SELECT *
 FROM `service_provider`
 WHERE facebook_id = p_facebook_id;
-END */;;
+END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `service_provider_register` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = '' */ ;
+ SET sql_mode              = @saved_sql_mode  ;
+ SET character_set_client  = @saved_cs_client  ;
+ SET character_set_results = @saved_cs_results  ;
+ SET collation_connection  = @saved_col_connection  ;
+ DROP PROCEDURE IF EXISTS `service_provider_register` ;
+ SET @saved_cs_client      = @@character_set_client  ;
+ SET @saved_cs_results     = @@character_set_results  ;
+ SET @saved_col_connection = @@collation_connection  ;
+ SET character_set_client  = utf8  ;
+ SET character_set_results = utf8  ;
+ SET collation_connection  = utf8_general_ci  ;
+ SET @saved_sql_mode       = @@sql_mode  ;
+ SET sql_mode              = ''  ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50020 DEFINER=`root`@`localhost`*/ /*!50003 PROCEDURE `service_provider_register`(
+ CREATE  DEFINER=`root`@`localhost`  PROCEDURE `service_provider_register`(
 			p_address VARCHAR(512),
 			p_category VARCHAR(512),
 			p_city VARCHAR(512),
@@ -502,23 +502,23 @@ END IF;
 
 
 
-END */;;
+END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `service_provider_update_rating` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = '' */ ;
+ SET sql_mode              = @saved_sql_mode  ;
+ SET character_set_client  = @saved_cs_client  ;
+ SET character_set_results = @saved_cs_results  ;
+ SET collation_connection  = @saved_col_connection  ;
+ DROP PROCEDURE IF EXISTS `service_provider_update_rating` ;
+ SET @saved_cs_client      = @@character_set_client  ;
+ SET @saved_cs_results     = @@character_set_results  ;
+ SET @saved_col_connection = @@collation_connection  ;
+ SET character_set_client  = utf8  ;
+ SET character_set_results = utf8  ;
+ SET collation_connection  = utf8_general_ci  ;
+ SET @saved_sql_mode       = @@sql_mode  ;
+ SET sql_mode              = ''  ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50020 DEFINER=`root`@`localhost`*/ /*!50003 PROCEDURE `service_provider_update_rating`(
+ CREATE  DEFINER=`root`@`localhost`  PROCEDURE `service_provider_update_rating`(
 		p_service_provider_facebook_id BIGINT)
 BEGIN
 DECLARE _total_rating INT;
@@ -542,20 +542,20 @@ SET average_rating = _average_rating
 WHERE facebook_id = p_service_provider_facebook_id;
 
 SELECT _average_rating;
-END */;;
+END ;;
 DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+ SET sql_mode              = @saved_sql_mode  ;
+ SET character_set_client  = @saved_cs_client  ;
+ SET character_set_results = @saved_cs_results  ;
+ SET collation_connection  = @saved_col_connection  ;
+ SET TIME_ZONE=@OLD_TIME_ZONE ;
 
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+ SET SQL_MODE=@OLD_SQL_MODE ;
+ SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS ;
+ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS ;
+ SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT ;
+ SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS ;
+ SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION ;
+ SET SQL_NOTES=@OLD_SQL_NOTES ;
 
 -- Dump completed on 2012-10-01 16:03:20
