@@ -27,3 +27,4 @@ class Service_Provider extends DB_Object
         return DB_Helper::ExecuteScalar("CALL rating_register ($rating, $facebook_id, $service_provider_facebook_id)");
     }
 }
+

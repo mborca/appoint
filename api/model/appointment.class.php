@@ -11,9 +11,9 @@ class Appointment extends DB_Object
     {
         return DB_Helper::ExecuteScalar("CALL appointment_insert ('$start_date', '$end_date', $service_provider_facebook_id, '$user_email', $user_facebook_id, '$user_firstname', '$user_lastname')");
     }
-    static public function Delete($id)
+    static public function Delete($user_facebook_id,$start_date)
     {
-        return DB_Helper::ExecuteNonQuery("CALL service_provider_delete ($id)");
+        DB_Helper::ExecuteNonQuery("CALL appointment_delete ($user_facebook_id,'$start_date')");
     }
     static public function Select($facebook_id, $start_date, $end_date)
     {

@@ -1,10 +1,10 @@
 CREATE DATABASE  IF NOT EXISTS `appoint`  DEFAULT CHARACTER SET utf8 ;
 USE `appoint`;
--- MySQL dump 10.13  Distrib 5.5.9, for osx10.6 (i386)
+-- MySQL dump 10.13  Distrib 5.5.24, for osx10.5 (i386)
 --
--- Host: localhost    Database: appoint
+-- Host: 127.0.0.1    Database: appoint
 -- ------------------------------------------------------
--- Server version	5.5.9
+-- Server version	5.5.25
 
  SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT ;
  SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS ;
@@ -16,6 +16,39 @@ USE `appoint`;
  SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 ;
  SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' ;
  SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 ;
+
+--
+-- Table structure for table `appointment`
+--
+
+DROP TABLE IF EXISTS `appointment`;
+ SET @saved_cs_client     = @@character_set_client ;
+ SET character_set_client = utf8 ;
+CREATE TABLE `appointment` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `service_provider_facebook_id` bigint(20) NOT NULL,
+  `user_facebook_id` bigint(20) NOT NULL,
+  `user_first_name` varchar(512) DEFAULT NULL,
+  `user_last_name` varchar(512) DEFAULT NULL,
+  `user_email` varchar(512) DEFAULT NULL,
+  `start_date` datetime NOT NULL,
+  `end_date` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_serviceprovider_appointment_idx` (`service_provider_facebook_id`),
+  KEY `idx_appointment_appointment_date` (`start_date`),
+  CONSTRAINT `fk_serviceprovider_appointment` FOREIGN KEY (`service_provider_facebook_id`) REFERENCES `service_provider` (`facebook_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+ SET character_set_client = @saved_cs_client ;
+
+--
+-- Dumping data for table `appointment`
+--
+
+LOCK TABLES `appointment` WRITE;
+ ALTER TABLE `appointment` DISABLE KEYS ;
+INSERT INTO `appointment` VALUES (7,1517375131,1517375131,'Marian','Borca','mborca@gmail.com','2012-09-24 13:00:00','2012-09-24 14:00:00'),(8,1517375131,9001,'Maxime','Gagne','email12@test.com','2012-09-24 11:00:00','2012-09-24 12:00:00'),(9,1517375131,9002,'Ugo','Tessier','email13@test.com','2012-09-25 13:00:00','2012-09-25 14:00:00'),(10,1517375131,9003,'Doruk','Vardaryildiz','email14@test.com','2012-09-26 16:00:00','2012-09-27 17:00:00'),(13,1517375131,1517375131,'test','test2','email@email.com','0000-00-00 00:00:00','0000-00-00 00:00:00'),(15,1517375131,0,'test','test2','email@email.com','2012-09-26 10:00:00','2012-09-26 11:00:00'),(17,1517375131,1517375131,'test','test2','email@email.com','2012-09-26 11:00:00','2012-09-26 12:00:00'),(18,1517375131,100004218783916,'test','test2','email@email.com','2012-09-26 12:00:00','2012-09-26 13:00:00');
+ ALTER TABLE `appointment` ENABLE KEYS ;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `rating`
@@ -79,42 +112,13 @@ CREATE TABLE `service_provider` (
 
 LOCK TABLES `service_provider` WRITE;
  ALTER TABLE `service_provider` DISABLE KEYS ;
-INSERT INTO `service_provider` VALUES (1000,'Barber','H D Mandrak Barber Shop\nH D Mandrak Barber Shop',NULL,'Canada','Quebec','Montreal','1967, rue Jean-Talon E, Montr√©al, QC H2E 1T9','514-722-3111','email1@test.com',NULL,NULL,NULL),(1001,'Barber','Barbier Manuel Baeza\n',NULL,'Canada','Quebec','Montreal','716, rue Gilford, Montr√©al, QC H2J 1N6','514-524-0068','email2@test.com',NULL,NULL,NULL),(1002,'Barber','Shoppers City East Barber Shop\nShoppers City East Barber Shop\n',NULL,'Canada','Ontario','Ottawa','2018 Ogilvie Rd, Gloucester, ON K1J 7N9','613-746-8968','email3@test.com',NULL,NULL,NULL),(1003,'Dentist','Adams Orthodontics',NULL,'Canada','Ontario','Ottawa','2150 Montreal Rd, Gloucester, ON K1J 6M7','613-800-1136','email4@test.com',NULL,NULL,NULL),(1004,'Dentist','Al-Mulla Mahdy Dr\n',NULL,'Canada','Ontario','Ottawa','2446 Bank St, Ottawa, ON','613-321-2610','email5@test.com',NULL,NULL,NULL),(1005,'Dentist','Associated Dental Care',NULL,'Canada','Ontario','Ottawa','2269 Riverside Dr, Ottawa, ON K1H 8K2','613-737-4944','email6@test.com',NULL,NULL,NULL),(1006,'Dentist','A La Clinique Dentaire St-Denis',NULL,'Canada','Quebec','Montreal','6915, rue Saint-Denis, Montr√©al, QC H2S 2S3','514-273-3368','email7@test.com',NULL,NULL,NULL),(1007,'Barber','Bcn Cuts. Barber Shop',NULL,'Spain',NULL,'Barcelona','Gran de Gracia 223, 08012 Barcelona','+34 93 611 1813','email8@test.com',NULL,NULL,NULL),(1008,'Financial','BCG',NULL,'Spain',NULL,'Barcelona','Avda. Diagonal, 640 - 4¬∞A \nBarcelona 8017 Spain','+34 93 363 47 00','email9@test.com',NULL,NULL,NULL),(1009,'Financial','Egon Zehnder International',NULL,'Spain',NULL,'Madrid','123 Madrid','915 314 115','email10@test.com',NULL,NULL,NULL),(1517375131,'Dentist','Marian CO',NULL,'Canada','Quebec','Montreal','2100 rue Drummond Qc H4X 1X1','15148037957','email11@test.com',NULL,NULL,3.33333);
+INSERT INTO `service_provider` VALUES (1000,'Barber','H D Mandrak Barber Shop\nH D Mandrak Barber Shop',NULL,'Canada','Quebec','Montreal','1967, rue Jean-Talon E, Montr‚àö¬©al, QC H2E 1T9','514-722-3111','email1@test.com',NULL,NULL,NULL),(1001,'Barber','Barbier Manuel Baeza\n',NULL,'Canada','Quebec','Montreal','716, rue Gilford, Montr‚àö¬©al, QC H2J 1N6','514-524-0068','email2@test.com',NULL,NULL,NULL),(1002,'Barber','Shoppers City East Barber Shop\nShoppers City East Barber Shop\n',NULL,'Canada','Ontario','Ottawa','2018 Ogilvie Rd, Gloucester, ON K1J 7N9','613-746-8968','email3@test.com',NULL,NULL,NULL),(1003,'Dentist','Adams Orthodontics',NULL,'Canada','Ontario','Ottawa','2150 Montreal Rd, Gloucester, ON K1J 6M7','613-800-1136','email4@test.com',NULL,NULL,NULL),(1004,'Dentist','Al-Mulla Mahdy Dr\n',NULL,'Canada','Ontario','Ottawa','2446 Bank St, Ottawa, ON','613-321-2610','email5@test.com',NULL,NULL,NULL),(1005,'Dentist','Associated Dental Care',NULL,'Canada','Ontario','Ottawa','2269 Riverside Dr, Ottawa, ON K1H 8K2','613-737-4944','email6@test.com',NULL,NULL,NULL),(1006,'Dentist','A La Clinique Dentaire St-Denis',NULL,'Canada','Quebec','Montreal','6915, rue Saint-Denis, Montr‚àö¬©al, QC H2S 2S3','514-273-3368','email7@test.com',NULL,NULL,NULL),(1007,'Barber','Bcn Cuts. Barber Shop',NULL,'Spain',NULL,'Barcelona','Gran de Gracia 223, 08012 Barcelona','+34 93 611 1813','email8@test.com',NULL,NULL,NULL),(1008,'Financial','BCG',NULL,'Spain',NULL,'Barcelona','Avda. Diagonal, 640 - 4¬¨‚àûA \nBarcelona 8017 Spain','+34 93 363 47 00','email9@test.com',NULL,NULL,NULL),(1009,'Financial','Egon Zehnder International',NULL,'Spain',NULL,'Madrid','123 Madrid','915 314 115','email10@test.com',NULL,NULL,NULL),(1517375131,'Dentist','Marian CO',NULL,'Canada','Quebec','Montreal','2100 rue Drummond Qc H4X 1X1','15148037957','email11@test.com',NULL,NULL,3.33333);
  ALTER TABLE `service_provider` ENABLE KEYS ;
 UNLOCK TABLES;
 
 --
--- Table structure for table `appointment`
+-- Dumping events for database 'appoint'
 --
-
-DROP TABLE IF EXISTS `appointment`;
- SET @saved_cs_client     = @@character_set_client ;
- SET character_set_client = utf8 ;
-CREATE TABLE `appointment` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `service_provider_facebook_id` bigint(20) NOT NULL,
-  `user_facebook_id` bigint(20) NOT NULL,
-  `user_first_name` varchar(512) DEFAULT NULL,
-  `user_last_name` varchar(512) DEFAULT NULL,
-  `user_email` varchar(512) DEFAULT NULL,
-  `start_date` datetime NOT NULL,
-  `end_date` datetime NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_serviceprovider_appointment_idx` (`service_provider_facebook_id`),
-  KEY `idx_appointment_appointment_date` (`start_date`),
-  CONSTRAINT `fk_serviceprovider_appointment` FOREIGN KEY (`service_provider_facebook_id`) REFERENCES `service_provider` (`facebook_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
- SET character_set_client = @saved_cs_client ;
-
---
--- Dumping data for table `appointment`
---
-
-LOCK TABLES `appointment` WRITE;
- ALTER TABLE `appointment` DISABLE KEYS ;
-INSERT INTO `appointment` VALUES (7,1517375131,1517375131,'Marian','Borca','mborca@gmail.com','2012-09-24 13:00:00','2012-09-24 14:00:00'),(8,1517375131,9001,'Maxime','Gagne','email12@test.com','2012-09-24 11:00:00','2012-09-24 12:00:00'),(9,1517375131,9002,'Ugo','Tessier','email13@test.com','2012-09-25 13:00:00','2012-09-25 14:00:00'),(10,1517375131,9003,'Doruk','Vardaryildiz','email14@test.com','2012-09-26 16:00:00','2012-09-27 17:00:00');
- ALTER TABLE `appointment` ENABLE KEYS ;
-UNLOCK TABLES;
 
 --
 -- Dumping routines for database 'appoint'
@@ -198,7 +202,7 @@ DELIMITER ;;
     p_end_date datetime
 )
 BEGIN
-    DECLARE _id int DEFAULT 0;
+    DECLARE _id BIGINT DEFAULT 0;
     SELECT user_facebook_id INTO _id FROM appointment
         WHERE service_provider_facebook_id = p_service_provider_facebook_id
         AND start_date >= p_start_date
@@ -220,10 +224,10 @@ DELIMITER ;
  SET @saved_sql_mode       = @@sql_mode  ;
  SET sql_mode              = ''  ;
 DELIMITER ;;
- CREATE  DEFINER=`root`@`localhost`  PROCEDURE `appointment_delete`(p_id INT)
+ CREATE  DEFINER=`root`@`localhost`  PROCEDURE `appointment_delete`(p_user_facebook_id BIGINT,p_start_date DATETIME)
 BEGIN
 	DELETE FROM appointment
-	WHERE id = p_id;
+	WHERE user_facebook_id = p_user_facebook_id AND start_date=p_start_date;
 END ;;
 DELIMITER ;
  SET sql_mode              = @saved_sql_mode  ;
@@ -558,4 +562,4 @@ DELIMITER ;
  SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION ;
  SET SQL_NOTES=@OLD_SQL_NOTES ;
 
--- Dump completed on 2012-10-01 16:03:20
+-- Dump completed on 2012-10-04 18:20:04

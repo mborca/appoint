@@ -41,6 +41,7 @@ class DB_Helper
                 $results = $row[0];
                 break;
             case QueryType::NonQuery;
+                //var_dump($result);
                 $results = $result->num_rows;
                 break;
             case QueryType::SingleObject:
@@ -63,6 +64,7 @@ class DB_Helper
             default:
                 throw new Exception("ERROR: Undefined query type: $query_type");
         }
+        //var_dump($result);
         $result->close();
         $mysqli->close();
         return $results;

@@ -25,11 +25,11 @@ app.Base = function() {
 app.Base.prototype.init_ = function() {
     
     FB.init({
-      appId      : app.configuration.appId, // App ID
-      channelUrl : app.configuration.baseUrl.replace(/https?:/, '') + 'channel.php', // Channel File
-      status     : true, // check login status
-      cookie     : true, // enable cookies to allow the server to access the session
-      xfbml      : true  // parse XFBML
+        appId      : app.configuration.appId, // App ID
+        channelUrl : app.configuration.baseUrl.replace(/https?:/, '') + 'channel.php', // Channel File
+        status     : true, // check login status
+        cookie     : true, // enable cookies to allow the server to access the session
+        xfbml      : true  // parse XFBML
     });
 };
 
@@ -45,7 +45,7 @@ app.Base.prototype.bindEvents_ = function() {
     
     this.dom_.country.on('change', function() {
         var cities = $('select[id^=city_]'),
-            country = this.value;
+        country = this.value;
         cities.addClass('hidden');
         $('#city_' + country).removeClass('hidden');
     });
@@ -80,13 +80,13 @@ app.Search.prototype.bindEvents_ = function() {
 
         self.search($('#category').val(), $('#country').val(), $('select[id^=city_]:not(.hidden)').val())
         .done(function(results) {
-          self.renderResults_(results);
+            self.renderResults_(results);
         });
     });
 
     $('#results').on('change', '.rating', function() {
         var me = $(this),
-            li = me.closest('li');
+        li = me.closest('li');
 
         self.rate(app.configuration.userId, 
             li.data('id'),
@@ -141,7 +141,9 @@ app.Search.prototype.executeIfAuthorized_ = function(callback, askForLogin){
                     } else {
                         callback();
                     }
-                }, { scope: 'publish_actions, friends_actions:' + app.configuration.ogNamespace + ', user_actions:' + app.configuration.ogNamespace });
+                }, {
+                    scope: 'publish_actions, friends_actions:' + app.configuration.ogNamespace + ', user_actions:' + app.configuration.ogNamespace
+                });
             } else 
                 callback();
         });
@@ -149,7 +151,7 @@ app.Search.prototype.executeIfAuthorized_ = function(callback, askForLogin){
 };
 
 app.Search.prototype.search = function(category, country, city) {
-   return $.ajax({
+    return $.ajax({
         type: 'GET',
         data: {
             category: category, 
@@ -219,7 +221,10 @@ app.MyService.prototype.init_ = function() {
     if (this.options.userId) {
         $.ajax({
             type: 'GET',
-            data: {action: 'get', id: this.options.userId},
+            data: {
+                action: 'get', 
+                id: this.options.userId
+            },
             url: this.dom_.form.attr('action'),
             dataType: 'json'
         }).done(function(data) {
@@ -244,14 +249,14 @@ app.MyService.prototype.bindEvents_ = function() {
         e.preventDefault();
         
         self.save().done(function() {
-          self.saveSuccess_();
+            self.saveSuccess_();
         });
     });
 };
 
 app.MyService.prototype.saveSuccess_ = function() {
     
-};
+    };
 
 app.MyService.prototype.save = function() {
 
@@ -274,7 +279,7 @@ app.Service = function(serviceProviderId) {
 
 app.Service.prototype.init_ = function() {
     
-};
+    };
 
 app.Service.prototype.mapDom_ = function() {
     this.dom_ = {};
@@ -285,15 +290,14 @@ app.Service.prototype.bindEvents_ = function() {
 
     $('table').on('click', 'td', function(){
         var me = $(this),
-            id = me.data('id'),
-            action = me.data('action'),
-            since = me.data('since'),
-            until = me.data('until');
+        id = me.data('id'),
+        action = me.data('action'),
+        since = me.data('since'),
+        until = me.data('until');
 
 
         if (!action)
             return;
-        
 
         $.ajax({
             type: 'GET',
@@ -302,14 +306,18 @@ app.Service.prototype.bindEvents_ = function() {
                 end_date: until,
                 service_provider_facebook_id: self.serviceProviderId,
                 user_email: 'email@email.com',
-                user_facebook_id: 1517375131,
+                user_facebook_id: id,
                 user_firstname: 'test',
-                user_lastname: 'test2'
+                user_lastname: 'test2',
+                action : action
             },
             url: app.configuration.baseUrl + 'services/book.php',
             dataType: 'json'
         }).always(function(){
-            me.css('background-color', 'green');
+            if(action=='book')
+                me.css('background-color', 'green');
+            else if(action=='cancel')
+                me.css('background-color', 'white');
         });
 
     });

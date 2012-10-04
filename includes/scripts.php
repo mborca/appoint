@@ -5,7 +5,7 @@
 <script>
     app.dependencies = { 
         facebookSDK: false, 
-        ready: false, 
+        ready: false
     };
     
     app.configuration.appId = '<?php echo FB_APP_ID; ?>';

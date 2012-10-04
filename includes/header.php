@@ -9,13 +9,14 @@ $facebook = new Facebook(array(
 // the current page name
 $page = str_replace('.php', '', substr($_SERVER['SCRIPT_NAME'], strrpos($_SERVER['SCRIPT_NAME'], '/') + 1));
 
-$user_id = 1517375131;
+$user_id = 100004218783916;
+
 //$user_id = $facebook->getUser();
 //if(!$user_id)
 //{
-//   $oauth_url = 'https://www.facebook.com/dialog/oauth';
+//   $oauth_url = 'http://www.facebook.com/dialog/oauth';
 //   $oauth_url .= '?client_id='.FB_APP_ID;
-//   $oauth_url .= '&redirect_uri='.  urlencode('https://apps.facebook.com/appointments-app/');
+//   $oauth_url .= '&redirect_uri='.  urlencode('http://apps.facebook.com/appointments-app/');
 //   $oauth_url .= '&scope=email';
 //   client_redirect($oauth_url);
 //}
