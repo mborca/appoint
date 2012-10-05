@@ -23,7 +23,7 @@ if ($action == 'book') {
     echo $user_facebook_id;
     $fbNotif = $notification->sendNotification($user_facebook_id, 'You have received a new appointment from Appoint on octobre 20th.');
     //if ($fbNotif == 1) {
-    $twilioNotif = $notification->sendTwilioNotification('15149525261');
+    $twilioNotif = $notification->sendTwilioNotification(TWILIO_PHONE);
     if ($twilioNotif == 1) {
         echo 'All notifications ok!';
     } else {

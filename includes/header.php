@@ -9,7 +9,8 @@ $facebook = new Facebook(array(
 // the current page name
 $page = str_replace('.php', '', substr($_SERVER['SCRIPT_NAME'], strrpos($_SERVER['SCRIPT_NAME'], '/') + 1));
 
-$user_id = 100004218783916;
+// $user_id = 100004218783916;
+$user_id = 1517375131;
 
 //$user_id = $facebook->getUser();
 //if(!$user_id)
