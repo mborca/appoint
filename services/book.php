@@ -38,7 +38,7 @@ if ($action == 'book') {
     echo 'startdate=' + $start_date;
     $fbNotif = $notification->sendNotification($user_facebook_id, 'An appointment has been canceled from Appoint on octobre 20th.');
     //if ($fbNotif == 1) {
-    $twilioNotif = $notification->sendTwilioNotification('15149525261');
+    $twilioNotif = $notification->sendTwilioNotification(TWILIO_PHONE);
     if ($twilioNotif == 1) {
         echo 'All notifications ok!';
     } else {
