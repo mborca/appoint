@@ -1,8 +1,7 @@
 <?php
 
-class Services_Twilio_Rest_Members
-    extends Services_Twilio_ListResource
-{
+class Services_Twilio_Rest_Members extends Services_Twilio_ListResource {
+
     /**
      * Return the member at the front of the queue. Note that any operations 
      * performed on the Member returned from this function will use the /Front 
@@ -15,8 +14,10 @@ class Services_Twilio_Rest_Members
     }
 
     /* Participants are identified by CallSid, not like ME123 */
+
     public function getObjectFromJson($params, $idParam = 'sid') {
         return parent::getObjectFromJson($params, 'call_sid');
     }
+
 }
 

@@ -1,4 +1,5 @@
 <?php
+
 require_once '../api/api.php';
 
 $id = $_REQUEST['id'];

@@ -1,10 +1,10 @@
 <?php
+
 require_once '../api/api.php';
 
 $id = $_REQUEST['id'];
 $action = $_REQUEST['action'];
-switch ($action)
-{
+switch ($action) {
     case 'get':
         echo json_encode(Service_Provider::GetByFacebookID($id));
         break;

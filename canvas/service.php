@@ -49,7 +49,7 @@ $end_date = '2012-09-30';
     ?>
 </table>
 
-    <?php include('../includes/scripts.php'); ?>
+<?php include('../includes/scripts.php'); ?>
 <script>
     $(document).ready(function() {
         app.controllers.page = new app.Service('<?php echo $service_provider_facebook_id; ?>');

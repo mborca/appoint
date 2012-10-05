@@ -1,4 +1,5 @@
 <?php
+
 require_once '../api/api.php';
 
 $rating = $_REQUEST['rating'];

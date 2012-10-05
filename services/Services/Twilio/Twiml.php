@@ -3,7 +3,9 @@
 /**
  * Exception class for Services_Twilio_Twiml.
  */
-class Services_Twilio_TwimlException extends Exception {}
+class Services_Twilio_TwimlException extends Exception {
+    
+}
 
 /**
  * Twiml response generator.
@@ -14,8 +16,7 @@ class Services_Twilio_TwimlException extends Exception {}
  * @license  http://creativecommons.org/licenses/MIT/ MIT
  * @link     https://gist.github.com/855985
  */
-class Services_Twilio_Twiml
-{
+class Services_Twilio_Twiml {
 
     protected $element;
 
@@ -27,23 +28,22 @@ class Services_Twilio_Twiml
      *   - attributes to add to the element
      *   - if null, initialize an empty element named 'Response'
      */
-    public function __construct($arg = null)
-    {
+    public function __construct($arg = null) {
         switch (true) {
-        case $arg instanceof SimpleXmlElement:
-            $this->element = $arg;
-            break;
-        case $arg === null:
-            $this->element = new SimpleXmlElement('<Response/>');
-            break;
-        case is_array($arg):
-            $this->element = new SimpleXmlElement('<Response/>');
-            foreach ($arg as $name => $value) {
-                $this->element->addAttribute($name, $value);
-            }
-            break;
-        default:
-            throw new TwimlException('Invalid argument');
+            case $arg instanceof SimpleXmlElement:
+                $this->element = $arg;
+                break;
+            case $arg === null:
+                $this->element = new SimpleXmlElement('<Response/>');
+                break;
+            case is_array($arg):
+                $this->element = new SimpleXmlElement('<Response/>');
+                foreach ($arg as $name => $value) {
+                    $this->element->addAttribute($name, $value);
+                }
+                break;
+            default:
+                throw new TwimlException('Invalid argument');
         }
     }
 
@@ -73,8 +73,7 @@ class Services_Twilio_Twiml
      *
      * @return SimpleXmlElement A SimpleXmlElement
      */
-    public function __call($verb, array $args)
-    {
+    public function __call($verb, array $args) {
         list($noun, $attrs) = $args + array('', array());
         if (is_array($noun)) {
             list($attrs, $noun) = array($noun, '');
@@ -101,9 +100,7 @@ class Services_Twilio_Twiml
          */
         $normalized = htmlentities($noun, null, null, false);
         //then escape it again
-        $child = empty($noun)
-            ? $this->element->addChild(ucfirst($verb))
-            : $this->element->addChild(ucfirst($verb), $normalized);
+        $child = empty($noun) ? $this->element->addChild(ucfirst($verb)) : $this->element->addChild(ucfirst($verb), $normalized);
         foreach ($attrs as $name => $value) {
             /* Note that addAttribute escapes raw ampersands by default, so we 
              * haven't touched its implementation. So this is the matrix for 
@@ -125,11 +122,10 @@ class Services_Twilio_Twiml
      *
      * @return string The response as an XML string
      */
-    public function __toString()
-    {
+    public function __toString() {
         $xml = $this->element->asXml();
         return str_replace(
-            '<?xml version="1.0"?>', 
-            '<?xml version="1.0" encoding="UTF-8"?>', $xml);
+                        '<?xml version="1.0"?>', '<?xml version="1.0" encoding="UTF-8"?>', $xml);
     }
+
 }

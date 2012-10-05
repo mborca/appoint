@@ -1,8 +1,7 @@
 <?php
 
-class Services_Twilio_Rest_Queues
-    extends Services_Twilio_ListResource
-{
+class Services_Twilio_Rest_Queues extends Services_Twilio_ListResource {
+
     /**
      * Create a new Queue
      *
@@ -12,8 +11,9 @@ class Services_Twilio_Rest_Queues
      */
     function create($friendly_name, array $params = array()) {
         return parent::_create(array(
-            'FriendlyName' => $friendly_name,
-        ) + $params);
+                    'FriendlyName' => $friendly_name,
+                        ) + $params);
     }
+
 }
 

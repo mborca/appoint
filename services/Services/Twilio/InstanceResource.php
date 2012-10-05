@@ -8,18 +8,16 @@
  * @author   Neuman Vong <neuman@twilio.com>
  * @license  http://creativecommons.org/licenses/MIT/ MIT
  * @link     http://pear.php.net/package/Services_Twilio
- */ 
-abstract class Services_Twilio_InstanceResource
-    extends Services_Twilio_Resource
-{
+ */
+abstract class Services_Twilio_InstanceResource extends Services_Twilio_Resource {
+
     /**
      * @param mixed $params An array of updates, or a property name
      * @param mixed $value  A value with which to update the resource
      *
      * @return null
      */
-    public function update($params, $value = null)
-    {
+    public function update($params, $value = null) {
         if (!is_array($params)) {
             $params = array($params => $value);
         }
@@ -27,7 +25,7 @@ abstract class Services_Twilio_InstanceResource
         $this->updateAttributes($decamelizedParams);
     }
 
-    /* 
+    /*
      * Add all properties from an associative array (the JSON response body) as 
      * properties on this instance resource, except the URI
      *
@@ -35,6 +33,7 @@ abstract class Services_Twilio_InstanceResource
      *      this instance
      * @return null Purely side effecting
      */
+
     public function updateAttributes($params) {
         unset($params->uri);
         foreach ($params as $name => $value) {
@@ -54,8 +53,7 @@ abstract class Services_Twilio_InstanceResource
      *
      * @return mixed Could be anything.
      */
-    public function __get($key)
-    {
+    public function __get($key) {
         if ($subresource = $this->getSubresources($key)) {
             return $subresource;
         }
@@ -65,4 +63,5 @@ abstract class Services_Twilio_InstanceResource
         }
         return $this->$key;
     }
+
 }

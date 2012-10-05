@@ -23,29 +23,28 @@ if ($action == 'book') {
     echo $user_facebook_id;
     $fbNotif = $notification->sendNotification($user_facebook_id, 'You have received a new appointment from Appoint on octobre 20th.');
     //if ($fbNotif == 1) {
-        $twilioNotif = $notification->sendTwilioNotification('15149525261');
-        if ($twilioNotif == 1) {
-            echo 'All notifications ok!';
-        } else {
-            echo $twilioNotif;
-        }
-   // }
-    
+    $twilioNotif = $notification->sendTwilioNotification('15149525261');
+    if ($twilioNotif == 1) {
+        echo 'All notifications ok!';
+    } else {
+        echo $twilioNotif;
+    }
+    // }
+
     echo json_decode(Appointment::Insert($start_date, $end_date, $service_provider_facebook_id, $user_email, $user_facebook_id, $user_firstname, $user_lastname));
-    
 } else if ($action == 'cancel') {
     echo 'action=' + $action;
     echo 'user_facebook_id=' + $user_facebook_id;
     echo 'startdate=' + $start_date;
     $fbNotif = $notification->sendNotification($user_facebook_id, 'An appointment has been canceled from Appoint on octobre 20th.');
     //if ($fbNotif == 1) {
-        $twilioNotif = $notification->sendTwilioNotification('15149525261');
-        if ($twilioNotif == 1) {
-            echo 'All notifications ok!';
-        } else {
-            echo $twilioNotif;
-        }
-   // }
-    json_decode(Appointment::Delete($user_facebook_id,$start_date));
+    $twilioNotif = $notification->sendTwilioNotification('15149525261');
+    if ($twilioNotif == 1) {
+        echo 'All notifications ok!';
+    } else {
+        echo $twilioNotif;
+    }
+    // }
+    json_decode(Appointment::Delete($user_facebook_id, $start_date));
 }
 ?>

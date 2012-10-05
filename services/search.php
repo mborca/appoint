@@ -1,4 +1,5 @@
 <?php
+
 require_once '../api/api.php';
 
 $category = $_REQUEST['category'];

@@ -20,8 +20,8 @@ spl_autoload_register('Services_Twilio_autoload');
  * @license  http://creativecommons.org/licenses/MIT/ MIT
  * @link     http://pear.php.net/package/Services_Twilio
  */
-class Services_Twilio extends Services_Twilio_Resource
-{
+class Services_Twilio extends Services_Twilio_Resource {
+
     const USER_AGENT = 'twilio-php/3.7.2';
 
     protected $http;
@@ -39,31 +39,26 @@ class Services_Twilio extends Services_Twilio_Resource
      * @param int                  $retryAttempts Number of times to retry failed requests
      */
     public function __construct(
-        $sid,
-        $token,
-        $version = null,
-        Services_Twilio_TinyHttp $_http = null,
-        $retryAttempts = 1
+    $sid, $token, $version = null, Services_Twilio_TinyHttp $_http = null, $retryAttempts = 1
     ) {
         $this->version = in_array($version, $this->versions) ?
                 $version : end($this->versions);
 
         if (null === $_http) {
             if (!in_array('curl', get_loaded_extensions())) {
-                trigger_error("It looks like you do not have curl installed.\n". 
-                    "Curl is required to make HTTP requests using the twilio-php\n" .
-                    "library. For install instructions, visit the following page:\n" . 
-                    "http://php.net/manual/en/curl.installation.php",
-                    E_USER_WARNING
+                trigger_error("It looks like you do not have curl installed.\n" .
+                        "Curl is required to make HTTP requests using the twilio-php\n" .
+                        "library. For install instructions, visit the following page:\n" .
+                        "http://php.net/manual/en/curl.installation.php", E_USER_WARNING
                 );
             }
             $_http = new Services_Twilio_TinyHttp(
-                "https://api.twilio.com",
-                array("curlopts" => array(
-                    CURLOPT_USERAGENT => self::USER_AGENT,
-                    CURLOPT_HTTPHEADER => array('Accept-Charset: utf-8'),
-                    CURLOPT_CAINFO => dirname(__FILE__) . '/cacert.pem',
-                ))
+                            "https://api.twilio.com",
+                            array("curlopts" => array(
+                                    CURLOPT_USERAGENT => self::USER_AGENT,
+                                    CURLOPT_HTTPHEADER => array('Accept-Charset: utf-8'),
+                                    CURLOPT_CAINFO => dirname(__FILE__) . '/cacert.pem',
+                            ))
             );
         }
         $_http->authenticate($sid, $token);
@@ -144,12 +139,10 @@ class Services_Twilio extends Services_Twilio_Resource
      *
      * @return object The object representation of the resource
      */
-    public function retrieveData($path, array $params = array(), 
-        $full_uri = false
+    public function retrieveData($path, array $params = array(), $full_uri = false
     ) {
         $uri = self::getRequestUri($path, $params, $full_uri);
-        return $this->_makeIdempotentRequest(array($this->http, 'get'), 
-            $uri, $this->retryAttempts);
+        return $this->_makeIdempotentRequest(array($this->http, 'get'), $uri, $this->retryAttempts);
     }
 
     /**
@@ -160,11 +153,9 @@ class Services_Twilio extends Services_Twilio_Resource
      *
      * @return object The object representation of the resource
      */
-    public function deleteData($path, array $params = array())
-    {
+    public function deleteData($path, array $params = array()) {
         $uri = self::getRequestUri($path, $params);
-        return $this->_makeIdempotentRequest(array($this->http, 'delete'), 
-            $uri, $this->retryAttempts);
+        return $this->_makeIdempotentRequest(array($this->http, 'delete'), $uri, $this->retryAttempts);
     }
 
     /**
@@ -175,12 +166,11 @@ class Services_Twilio extends Services_Twilio_Resource
      *
      * @return object The object representation of the resource
      */
-    public function createData($path, array $params = array())
-    {
+    public function createData($path, array $params = array()) {
         $path = "$path.json";
         $headers = array('Content-Type' => 'application/x-www-form-urlencoded');
         $response = $this->http->post(
-            $path, $headers, http_build_query($params, '', '&')
+                $path, $headers, http_build_query($params, '', '&')
         );
         return $this->_processResponse($response);
     }
@@ -193,8 +183,7 @@ class Services_Twilio extends Services_Twilio_Resource
      * @return object PHP object decoded from JSON
      * @throws Services_Twilio_RestException (Response in 300-500 class)
      */
-    private function _processResponse($response)
-    {
+    private function _processResponse($response) {
         list($status, $headers, $body) = $response;
         if ($status === 204) {
             return true;
@@ -202,19 +191,20 @@ class Services_Twilio extends Services_Twilio_Resource
         $decoded = json_decode($body);
         if ($decoded === null) {
             throw new Services_Twilio_RestException(
-                $status,
-                'Could not decode response body as JSON. ' . 
-                'This likely indicates a 500 server error'
+                    $status,
+                    'Could not decode response body as JSON. ' .
+                    'This likely indicates a 500 server error'
             );
         }
         if (200 <= $status && $status < 300) {
             return $decoded;
         }
         throw new Services_Twilio_RestException(
-            (int)$decoded->status,
-            $decoded->message,
-            isset($decoded->code) ? $decoded->code : null,
-            isset($decoded->more_info) ? $decoded->more_info : null
+                (int) $decoded->status,
+                $decoded->message,
+                isset($decoded->code) ? $decoded->code : null,
+                isset($decoded->more_info) ? $decoded->more_info : null
         );
     }
+
 }

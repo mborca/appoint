@@ -8,13 +8,12 @@
  * @author   Neuman Vong <neuman@twilio.com>
  * @license  http://creativecommons.org/licenses/MIT/ MIT
  * @link     http://pear.php.net/package/Services_Twilio
- */ 
-abstract class Services_Twilio_Resource
-{
+ */
+abstract class Services_Twilio_Resource {
+
     protected $subresources;
 
-    public function __construct($client, $uri, $params = array())
-    {
+    public function __construct($client, $uri, $params = array()) {
         $this->subresources = array();
         $this->client = $client;
 
@@ -26,41 +25,36 @@ abstract class Services_Twilio_Resource
         $this->init($client, $uri);
     }
 
-    protected function init($client, $uri)
-    {
+    protected function init($client, $uri) {
         // Left empty for derived classes to implement
     }
 
-    public function getSubresources($name = null)
-    {
+    public function getSubresources($name = null) {
         if (isset($name)) {
-            return isset($this->subresources[$name])
-                ? $this->subresources[$name]
-                : null;
+            return isset($this->subresources[$name]) ? $this->subresources[$name] : null;
         }
         return $this->subresources;
     }
 
-    protected function setupSubresources()
-    {
+    protected function setupSubresources() {
         foreach (func_get_args() as $name) {
             $constantized = ucfirst(self::camelize($name));
             $type = "Services_Twilio_Rest_" . $constantized;
             $this->subresources[$name] = new $type(
-                $this->client, $this->uri . "/$constantized"
+                            $this->client, $this->uri . "/$constantized"
             );
         }
     }
 
-    /* 
+    /*
      * Get the resource name from the classname
      * 
      * Ex: Services_Twilio_Rest_Accounts -> Accounts
      *
      * @param boolean $camelized Whether to return camel case or not
      */
-    public function getResourceName($camelized = false) 
-    {
+
+    public function getResourceName($camelized = false) {
         $name = get_class($this);
         $parts = explode('_', $name);
         $basename = end($parts);
@@ -71,18 +65,15 @@ abstract class Services_Twilio_Resource
         }
     }
 
-    public static function decamelize($word)
-    {
+    public static function decamelize($word) {
         return preg_replace(
-            '/(^|[a-z])([A-Z])/e',
-            'strtolower(strlen("\\1") ? "\\1_\\2" : "\\2")',
-            $word
+                        '/(^|[a-z])([A-Z])/e', 'strtolower(strlen("\\1") ? "\\1_\\2" : "\\2")', $word
         );
     }
 
-    public static function camelize($word)
-    {
+    public static function camelize($word) {
         return preg_replace('/(^|_)([a-z])/e', 'strtoupper("\\2")', $word);
     }
+
 }
 

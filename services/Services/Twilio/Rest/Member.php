@@ -1,8 +1,6 @@
 <?php
 
-class Services_Twilio_Rest_Member
-    extends Services_Twilio_InstanceResource
-{
+class Services_Twilio_Rest_Member extends Services_Twilio_InstanceResource {
 
     /**
      * Dequeue this member
@@ -15,8 +13,9 @@ class Services_Twilio_Rest_Member
      */
     public function dequeue($url, $method = 'POST') {
         return self::update(array(
-            'Url' => $url,
-            'Method' => $method,
-        ));
+                    'Url' => $url,
+                    'Method' => $method,
+                ));
     }
+
 }

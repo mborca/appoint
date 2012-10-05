@@ -1,10 +1,10 @@
-<?php 
+<?php
 require_once '../api/api.php';
 
 $facebook = new Facebook(array(
-    'appId'  => FB_APP_ID,
-    'secret' => FB_APP_SECRET
-));
+            'appId' => FB_APP_ID,
+            'secret' => FB_APP_SECRET
+        ));
 
 // the current page name
 $page = str_replace('.php', '', substr($_SERVER['SCRIPT_NAME'], strrpos($_SERVER['SCRIPT_NAME'], '/') + 1));
@@ -20,7 +20,6 @@ $user_id = 100004218783916;
 //   $oauth_url .= '&scope=email';
 //   client_redirect($oauth_url);
 //}
-
 ?>
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html xmlns:fb="http://ogp.me/ns/fb#" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->

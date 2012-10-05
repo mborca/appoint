@@ -1,17 +1,13 @@
 <?php
 
-class Services_Twilio_Rest_Calls
-    extends Services_Twilio_ListResource
-{
+class Services_Twilio_Rest_Calls extends Services_Twilio_ListResource {
 
-    public static function isApplicationSid($value)
-    {
+    public static function isApplicationSid($value) {
         return strlen($value) == 34
-            && !(strpos($value, "AP") === false);
+                && !(strpos($value, "AP") === false);
     }
 
-    public function create($from, $to, $url, array $params = array())
-    {
+    public function create($from, $to, $url, array $params = array()) {
 
         $params["To"] = $to;
         $params["From"] = $from;
@@ -24,4 +20,5 @@ class Services_Twilio_Rest_Calls
 
         return parent::_create($params);
     }
+
 }

@@ -8,8 +8,8 @@
  * @author Jeff Lindsay <jeff.lindsay@twilio.com>
  * @license  http://creativecommons.org/licenses/MIT/ MIT
  */
-class Services_Twilio_Capability
-{
+class Services_Twilio_Capability {
+
     public $accountSid;
     public $authToken;
     public $scopes;
@@ -23,12 +23,11 @@ class Services_Twilio_Capability
      * @param $authToken the secret key used to sign the token. Note, this auth
      *        token is not visible to the user of the token.
      */
-    public function __construct($accountSid, $authToken)
-    {
+    public function __construct($accountSid, $authToken) {
         $this->accountSid = $accountSid;
         $this->authToken = $authToken;
         $this->scopes = array();
-		$this->clientName = false;
+        $this->clientName = false;
     }
 
     /**
@@ -38,23 +37,21 @@ class Services_Twilio_Capability
      *
      * @param $clientName
      */
-    public function allowClientIncoming($clientName)
-    {
+    public function allowClientIncoming($clientName) {
 
         // clientName must be a non-zero length alphanumeric string
         if (preg_match('/\W/', $clientName)) {
             throw new InvalidArgumentException(
-                'Only alphanumeric characters allowed in client name.');
+                    'Only alphanumeric characters allowed in client name.');
         }
 
         if (strlen($clientName) == 0) {
             throw new InvalidArgumentException(
-                'Client name must not be a zero length string.');
+                    'Client name must not be a zero length string.');
         }
 
-		$this->clientName = $clientName;
-        $this->allow('client', 'incoming',
-            array('clientName' => $clientName));
+        $this->clientName = $clientName;
+        $this->allow('client', 'incoming', array('clientName' => $clientName));
     }
 
     /**
@@ -64,8 +61,7 @@ class Services_Twilio_Capability
      * @param $appParams signed parameters that the user of this token cannot
      *        overwrite.
      */
-    public function allowClientOutgoing($appSid, array $appParams=array())
-    {
+    public function allowClientOutgoing($appSid, array $appParams = array()) {
         $this->allow('client', 'outgoing', array(
             'appSid' => $appSid,
             'appParams' => http_build_query($appParams)));
@@ -76,8 +72,7 @@ class Services_Twilio_Capability
      *
      * @param $filters key/value filters to apply to the event stream
      */
-    public function allowEventStream(array $filters=array())
-    {
+    public function allowEventStream(array $filters = array()) {
         $this->allow('stream', 'subscribe', array(
             'path' => '/2010-04-01/Events',
             'params' => http_build_query($filters),
@@ -92,8 +87,7 @@ class Services_Twilio_Capability
      *        value is 3600 (1hr)
      * @return the newly generated token that is valid for $ttl seconds
      */
-    public function generateToken($ttl = 3600)
-    {
+    public function generateToken($ttl = 3600) {
         $payload = array(
             'scope' => array(),
             'iss' => $this->accountSid,
@@ -102,8 +96,8 @@ class Services_Twilio_Capability
         $scopeStrings = array();
 
         foreach ($this->scopes as $scope) {
-			if ($scope->privilege == "outgoing" && $this->clientName)
-				$scope->params["clientName"] = $this->clientName;
+            if ($scope->privilege == "outgoing" && $this->clientName)
+                $scope->params["clientName"] = $this->clientName;
             $scopeStrings[] = $scope->toString();
         }
 
@@ -114,6 +108,7 @@ class Services_Twilio_Capability
     protected function allow($service, $privilege, $params) {
         $this->scopes[] = new ScopeURI($service, $privilege, $params);
     }
+
 }
 
 /**
@@ -129,24 +124,22 @@ class Services_Twilio_Capability
  *
  * @author Jeff Lindsay <jeff.lindsay@twilio.com>
  */
-class ScopeURI
-{
+class ScopeURI {
+
     public $service;
     public $privilege;
     public $params;
 
-    public function __construct($service, $privilege, $params = array())
-    {
+    public function __construct($service, $privilege, $params = array()) {
         $this->service = $service;
         $this->privilege = $privilege;
         $this->params = $params;
     }
 
-    public function toString()
-    {
+    public function toString() {
         $uri = "scope:{$this->service}:{$this->privilege}";
         if (count($this->params)) {
-            $uri .= "?".http_build_query($this->params);
+            $uri .= "?" . http_build_query($this->params);
         }
         return $uri;
     }
@@ -157,11 +150,10 @@ class ScopeURI
      * @param string    $uri  The scope URI
      * @return ScopeURI The parsed scope uri
      */
-    public static function parse($uri)
-    {
+    public static function parse($uri) {
         if (strpos($uri, 'scope:') !== 0) {
             throw new UnexpectedValueException(
-                'Not a scope URI according to scheme');
+                    'Not a scope URI according to scheme');
         }
 
         $parts = explode('?', $uri, 1);
@@ -175,7 +167,7 @@ class ScopeURI
 
         if (count($parts) != 3) {
             throw new UnexpectedValueException(
-                'Not enough parts for scope URI');
+                    'Not enough parts for scope URI');
         }
 
         list($scheme, $service, $privilege) = $parts;
@@ -192,8 +184,8 @@ class ScopeURI
  *
  * @author Neuman Vong <neuman@twilio.com>
  */
-class JWT
-{
+class JWT {
+
     /**
      * @param string      $jwt    The JWT
      * @param string|null $key    The secret key
@@ -201,8 +193,7 @@ class JWT
      *
      * @return object The JWT's payload as a PHP object
      */
-    public static function decode($jwt, $key = null, $verify = true)
-    {
+    public static function decode($jwt, $key = null, $verify = true) {
         $tks = explode('.', $jwt);
         if (count($tks) != 3) {
             throw new UnexpectedValueException('Wrong number of segments');
@@ -229,14 +220,13 @@ class JWT
     }
 
     /**
-      * @param object|array $payload PHP object or array
-      * @param string       $key     The secret key
-      * @param string       $algo    The signing algorithm
-      *
-      * @return string A JWT
-      */
-    public static function encode($payload, $key, $algo = 'HS256')
-    {
+     * @param object|array $payload PHP object or array
+     * @param string       $key     The secret key
+     * @param string       $algo    The signing algorithm
+     *
+     * @return string A JWT
+     */
+    public static function encode($payload, $key, $algo = 'HS256') {
         $header = array('typ' => 'JWT', 'alg' => $algo);
 
         $segments = array();
@@ -257,8 +247,7 @@ class JWT
      *
      * @return string An encrypted message
      */
-    public static function sign($msg, $key, $method = 'HS256')
-    {
+    public static function sign($msg, $key, $method = 'HS256') {
         $methods = array(
             'HS256' => 'sha256',
             'HS384' => 'sha384',
@@ -275,13 +264,11 @@ class JWT
      *
      * @return object Object representation of JSON string
      */
-    public static function jsonDecode($input)
-    {
+    public static function jsonDecode($input) {
         $obj = json_decode($input);
         if (function_exists('json_last_error') && $errno = json_last_error()) {
             JWT::handleJsonError($errno);
-        }
-        else if ($obj === null && $input !== 'null') {
+        } else if ($obj === null && $input !== 'null') {
             throw new DomainException('Null result with non-null input');
         }
         return $obj;
@@ -292,13 +279,11 @@ class JWT
      *
      * @return string JSON representation of the PHP object or array
      */
-    public static function jsonEncode($input)
-    {
+    public static function jsonEncode($input) {
         $json = json_encode($input);
         if (function_exists('json_last_error') && $errno = json_last_error()) {
             JWT::handleJsonError($errno);
-        }
-        else if ($json === 'null' && $input !== null) {
+        } else if ($json === 'null' && $input !== null) {
             throw new DomainException('Null result with non-null input');
         }
         return $json;
@@ -309,8 +294,7 @@ class JWT
      *
      * @return string A decoded string
      */
-    public static function urlsafeB64Decode($input)
-    {
+    public static function urlsafeB64Decode($input) {
         $padlen = 4 - strlen($input) % 4;
         $input .= str_repeat('=', $padlen);
         return base64_decode(strtr($input, '-_', '+/'));
@@ -321,8 +305,7 @@ class JWT
      *
      * @return string The base64 encode of what you passed in
      */
-    public static function urlsafeB64Encode($input)
-    {
+    public static function urlsafeB64Encode($input) {
         return str_replace('=', '', strtr(base64_encode($input), '+/', '-_'));
     }
 
@@ -331,16 +314,14 @@ class JWT
      *
      * @return void
      */
-    private static function handleJsonError($errno)
-    {
+    private static function handleJsonError($errno) {
         $messages = array(
             JSON_ERROR_DEPTH => 'Maximum stack depth exceeded',
             JSON_ERROR_CTRL_CHAR => 'Unexpected control character found',
             JSON_ERROR_SYNTAX => 'Syntax error, malformed JSON'
         );
-        throw new DomainException(isset($messages[$errno])
-            ? $messages[$errno]
-            : 'Unknown JSON error: ' . $errno
+        throw new DomainException(isset($messages[$errno]) ? $messages[$errno] : 'Unknown JSON error: ' . $errno
         );
     }
+
 }

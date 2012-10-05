@@ -8,10 +8,8 @@
  * @author   Neuman Vong <neuman@twilio.com>
  * @license  http://creativecommons.org/licenses/MIT/ MIT
  * @link     http://pear.php.net/package/Services_Twilio
- */ 
-class Services_Twilio_Page
-    implements IteratorAggregate
-{
+ */
+class Services_Twilio_Page implements IteratorAggregate {
 
     /**
      * The item list.
@@ -26,8 +24,7 @@ class Services_Twilio_Page
      * @param object $page The page object
      * @param string $name The key of the item list
      */
-    public function __construct($page, $name, $next_page_uri = null)
-    {
+    public function __construct($page, $name, $next_page_uri = null) {
         $this->page = $page;
         $this->items = $page->{$name};
         $this->next_page_uri = $next_page_uri;
@@ -38,8 +35,7 @@ class Services_Twilio_Page
      *
      * @return array A list of instance resources
      */
-    public function getItems()
-    {
+    public function getItems() {
         return $this->items;
     }
 
@@ -50,8 +46,7 @@ class Services_Twilio_Page
      *
      * @return mixed Could be anything
      */
-    public function __get($prop)
-    {
+    public function __get($prop) {
         return $this->page->$prop;
     }
 
@@ -60,9 +55,9 @@ class Services_Twilio_Page
      *
      * @return Traversable
      */
-    public function getIterator()
-    {
+    public function getIterator() {
         return $this->getItems();
     }
+
 }
 
